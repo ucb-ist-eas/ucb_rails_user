@@ -1,0 +1,13 @@
+/ not used: see UcbRails::UsersDatatable
+%tr[user]
+  = td_bln(user.superuser?)
+  = td_bln(user.inactive?)
+  %td= user.first_name
+  %td= user.last_name
+  %td= mail_to(user.email)
+  %td= mail_to(user.alternate_email)
+  %td.dt= datetime_to_s(user.last_login_at, :long)
+  %td.min= user.ldap_uid
+  %td= link_to('edit', edit_admin_user_path(user), :class => 'btn btn-default btn-xs', :id => dom_id(user, 'edit'))
+  %td= link_to('delete', admin_user_path(user), :data => {confirm: 'Are you sure?'}, :method => :delete, :class => 'btn btn-xs btn-danger')
+

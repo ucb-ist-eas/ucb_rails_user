@@ -1,0 +1,14 @@
+= simple_form_for(@user, url: url, method: method, :html => {:class => 'form-horizontal'}, wrapper: :horizontal_form) do |f|
+  = f.input :ldap_uid, :input_html => {disabled: 'disabled'}
+  = f.input :first_name, :input_html => {disabled: 'disabled'}
+  = f.input :last_name, :input_html => {disabled: 'disabled'}
+  = f.input :email, :input_html => {disabled: 'disabled'}
+  = f.input :alternate_email
+  = f.input :last_login_at, as: :string, :input_html => {disabled: 'disabled', value: datetime_to_s(@user.last_login_at, :long)}
+  = f.input :superuser_flag, :as => :boolean, label: "Superuser?", wrapper: :horizontal_boolean
+  = f.input :inactive_flag, :as => :boolean, :label => "Inactive User?", wrapper: :horizontal_boolean
+
+  = form_actions do
+    = submit_button_tag("Update User")
+    = cancel_button_tag(url: admin_users_path)
+
