@@ -1,28 +1,3 @@
 # UcbRailsUser
-Short description and motivation.
+A Rails engine that provides authentication and user management for UCB Rails apps. The easiest way to use this is to generate a new app with the [ucb_rails](https://github.com/ucb-ist-eas/ucb_rails_cli) tool.
 
-## Usage
-How to use my plugin.
-
-## Installation
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'ucb_rails_user'
-```
-
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install ucb_rails_user
-```
-
-## Contributing
-Contribution directions go here.
-
-## License
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
