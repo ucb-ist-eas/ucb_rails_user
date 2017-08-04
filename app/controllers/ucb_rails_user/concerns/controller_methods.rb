@@ -80,7 +80,7 @@ module UcbRailsUser::Concerns::ControllerMethods
   end
 
   def not_authorized!
-    render(:text => "Not Authorized", :status => 401)
+    render plain: "Not Authorized", status: 401
     return false
   end
 
