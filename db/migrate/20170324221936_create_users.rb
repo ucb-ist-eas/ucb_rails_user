@@ -3,8 +3,8 @@ class CreateUsers < ActiveRecord::Migration[5.1]
     create_table :users, force: true do |t|
       t.string :ldap_uid, null: false
       t.string :employee_id, null: true
-      t.integer :affiliate_id, null: true
-      t.integer :student_id, null: true
+      t.string :affiliate_id, null: true
+      t.string :student_id, null: true
       t.boolean :superuser_flag, null: false, default: false
       t.boolean :inactive_flag, null: false, default: false
       t.string :first_name, null: true
