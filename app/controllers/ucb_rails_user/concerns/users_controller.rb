@@ -2,12 +2,10 @@ module UcbRailsUser::Concerns::UsersController
   extend ActiveSupport::Concern
 
   included do
-    before_filter :find_user, :only => [:edit, :update, :destroy]
-    skip_before_filter :ensure_admin_user, only: :toggle_admin, if: ->{ Rails.env.development? }
-
-    respond_to :html, :js
+    before_action :find_user, :only => [:edit, :update, :destroy]
+    before_action :ensure_admin_user
+    skip_before_action :ensure_admin_user, if: ->{ action_name == "toggle_superuser" && Rails.env.development? }
   end
-
 
   def index
     @users = User.all
