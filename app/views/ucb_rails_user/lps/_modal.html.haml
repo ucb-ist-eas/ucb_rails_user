@@ -1,0 +1,9 @@
+= modal(id: "lps-modal") do
+  = modal_header do
+    %h3.title Search For Person
+    = render partial: "ucb_rails_user/lps/form"
+  = modal_body do
+    #lps-results
+  = modal_footer do
+    #matches.pull-left
+    = modal_footer_close_button

@@ -1,0 +1,19 @@
+= form_tag('/ucb_rails/ldap_person_search', :class => "well form-inline", :id => 'lps-form', :method => :get, :remote => true) do
+
+  = hidden_field_tag('search-field-name')
+  = hidden_field_tag('result-link-http-method')
+  = hidden_field_tag('result-link-text')
+  = hidden_field_tag('result-link-class')
+  = hidden_field_tag('result-link-url')
+  
+  .form-group
+    = label_tag 'first_name', 'First Name'
+    = text_field_tag("first_name", nil, class: "form-control")
+
+  .form-group
+  = label_tag 'last_name', 'Last Name'
+  = text_field_tag("last_name", nil, class: "form-control")
+
+  = submit_button_tag('Search', id: 'lps-search')
+  = button("Clear", url: "#", :id => 'lps-clear')
+  
