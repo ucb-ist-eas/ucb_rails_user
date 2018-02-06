@@ -52,7 +52,10 @@ class UcbRailsUser::UserLdapService
     end
 
     def create_or_update_user_from_entry(entry)
-      if user = User.find_by_ldap_uid(entry.uid)
+      # LDAP returns some values as Net::BER::BerIdentifiedString instances, and not
+      # all DBs seem to handle that well (e.g. Oracle) - we might want to fix LDAP library
+      # to smooth this over?
+      if user = User.find_by_ldap_uid(entry.uid.to_s)
         update_user_from_ldap_entry(entry)
       else
         create_user_from_ldap_entry(entry)
