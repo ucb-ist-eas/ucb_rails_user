@@ -18,7 +18,6 @@ var addDatatablesToSearchResults = function () {
 }
 
 var addDatatablesToUsersTable = function () {
-  console.log('here2');
   $('.ucb-rails-users-table').dataTable({
     searching: true,
     order: [[ 3, "asc" ]],
@@ -29,10 +28,7 @@ var addDatatablesToUsersTable = function () {
   })
 }
 
-console.log("loading");
-
 $( window ).on("load", function() {
-  console.log("here1");
   // the datatable calling was failing intermittently, but adding the timeout
   // seemed to fix it, so ¯\_(ツ)_/¯
   window.setTimeout(addDatatablesToUsersTable, 100)
