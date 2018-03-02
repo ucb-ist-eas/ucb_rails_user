@@ -1,9 +1,10 @@
-%h1 Users
+.ucb-rails-users-table-header.clearfix
+  %h2.pull-left
+    Users
+  .pull-right
+    = link_to "Add new", new_admin_user_path(), class: "btn btn-primary"
 
--# TODO: reinstate this
-  %p= link_to_new_user
-
-= ucbr_table_tag User, data: {url: admin_users_path(format: "json")} do
+%table.table.table-striped.table-bordered.table-hover.ucb-rails-users-table
   %thead
     %tr
       %th.min Superuser?
@@ -19,6 +20,4 @@
   %tbody.highlight
     = render partial: "ucb_rails_user/users/user", collection: @users
 
--# TODO: reinstate this
--# render :partial => "lps/modal"
 

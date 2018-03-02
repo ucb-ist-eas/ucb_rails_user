@@ -1,0 +1,15 @@
+%h2 Add New User
+
+= form_tag admin_user_search_path(), method: :get, remote: true, class: "form-inline user-search-form" do
+  = text_field_tag :first_name, "", placeholder: "First name", class: "form-control"
+  = text_field_tag :last_name, "", placeholder: "Last name", class: "form-control"
+  = submit_tag "Search", class: "btn btn-primary"
+  = link_to "Cancel", admin_users_path(), class: "btn btn-default"
+
+.loader
+  Loading...
+
+.search-results
+  - if @results
+    = render "results"
+

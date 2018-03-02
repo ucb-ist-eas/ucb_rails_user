@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   match "/admin/users/toggle_superuser", to: UcbRailsUser::UsersController.action(:toggle_superuser),
     as: "admin_toggle_superuser", via: [:get]
 
+  match "/admin/users/search", to: UcbRailsUser::UsersController.action(:search),
+    as: "admin_user_search", via: [:get]
   resources :users, controller: "ucb_rails_user/users", path: "admin/users", as: :admin_users
 
 end

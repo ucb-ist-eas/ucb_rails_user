@@ -15,19 +15,36 @@ module UcbRailsUser::Concerns::UsersController
     end
   end
 
+  def search
+    @results = UcbRailsUser::LdapPerson::Finder.find_by_first_last(
+      params.fetch(:first_name),
+      params.fetch(:last_name),
+      :sort => :last_first_downcase
+    )
+  end
+
   def edit
   end
 
+  def new
+  end
+
   def create
-    uid = params.fetch(:uid)
+    uid = params.fetch(:ldap_uid)
+    user = nil
     if user = User.find_by_ldap_uid(uid)
       flash[:warning] = "User already exists"
     else
-      user = UcbRails::UserLdapService.create_user_from_uid(uid)
-      flash[:notice] = 'Record created'
+      begin
+        user = UcbRailsUser::UserLdapService.create_user_from_uid(uid)
+        flash[:notice] = "Record created"
+      rescue Exception => e
+        raise e
+        flash[:danger] = "Unable to create new user - please try again"
+        return redirect_to new_admin_user_path()
+      end
     end
-
-    render :js => %(window.location.href = '#{edit_admin_user_path(user)}')
+    redirect_to edit_admin_user_path(user)
   end
 
   def update

@@ -69,7 +69,21 @@ bin/rails railties:install:migrations
 bin/rake db:migrate
 ```
 
-7. Restart your host app as usual
+8. Update your assets files
+
+In `application.css` add this line:
+
+```
+*= require ucb_rails_user/main
+```
+
+And in `application.js` add this line:
+
+```
+*= require udb_rails_user/scripts
+```
+
+8. Restart your host app as usual
 
 You should be able to access the following routes:
 

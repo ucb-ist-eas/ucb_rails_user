@@ -1,0 +1,22 @@
+%h3 Search Results
+- if @results.empty?
+  %p No results matched your search
+- else
+  %table.table.table-striped.add-user-search-results-table
+    %thead
+      %tr
+        %th UID
+        %th First Name
+        %th Last Name
+        %th
+    %tbody
+      - @results.each do |person|
+        %tr
+          %td= person.uid
+          %td= person.first_name
+          %td= person.last_name
+          %td
+            = form_tag admin_users_path(), method: :post do
+              = hidden_field_tag :ldap_uid, person.uid
+              = submit_tag "Add", class: "btn btn-primary"
+
