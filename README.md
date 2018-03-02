@@ -8,6 +8,8 @@ A [Rails engine](http://guides.rubyonrails.org/engines.html) that provides authe
   * controller filters that block access to resources unless user is logged in
   * a default home page that reflects user's login status
   * admin screens for updating and deleting user records
+  
+This engine also includes the [Datatables](https://datatables.net/) JQuery plug-in, which is used in the user management screens. Host apps can make use of this as well.
 
 ## Prerequisites
 
