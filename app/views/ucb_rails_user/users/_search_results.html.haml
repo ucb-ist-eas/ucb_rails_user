@@ -6,6 +6,7 @@
     %thead
       %tr
         %th UID
+        %th Employee ID
         %th First Name
         %th Last Name
         %th
@@ -13,6 +14,7 @@
       - @results.each do |person|
         %tr
           %td= person.uid
+          %td= person.employee_id
           %td= person.first_name
           %td= person.last_name
           %td
