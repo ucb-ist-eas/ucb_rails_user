@@ -16,10 +16,13 @@ module UcbRailsUser::Concerns::UsersController
   end
 
   def search
-    @results = UcbRailsUser::LdapPerson::Finder.find_by_first_last(
-      params.fetch(:first_name),
-      params.fetch(:last_name),
-      :sort => :last_first_downcase
+    @results = UcbRailsUser::LdapPerson::Finder.find_by_attributes(
+      {
+        givenname: params.fetch(:first_name),
+        sn: params.fetch(:last_name),
+        employeenumber: params.fetch(:employee_id)
+      },
+      sort: :last_first_downcase
     )
   end
 
