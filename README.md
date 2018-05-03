@@ -82,7 +82,7 @@ In `application.css` add this line:
 And in `application.js` add this line:
 
 ```
-*= require udb_rails_user/scripts
+//= require ucb_rails_user/scripts
 ```
 
 8. Restart your host app as usual
