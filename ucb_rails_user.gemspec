@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency "omniauth"
   s.add_dependency "omniauth-cas", "~> 1.1.1"
 
-  s.add_dependency "ucb_ldap"#, "2.0.0.pre5"
+  s.add_dependency "ucb_ldap", "~> 3.0"
 
   # TODO: it would be nice to remove these, but that involves some rewriting
   s.add_dependency "bootstrap-view-helpers", "~> 0.0.14"
