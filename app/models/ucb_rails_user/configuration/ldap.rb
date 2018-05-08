@@ -10,28 +10,29 @@ module UcbRailsUser
 
       def configure
         configure_host
-        authenticate
+        initialize_ldap
         test_entries
       end
 
       private
 
       def configure_host
-        UCB::LDAP.host = config.fetch('host', default_host)
+        UCB::LDAP.host = config.fetch("host", default_host)
       end
 
-      def authenticate
-        if config.has_key?('username')
-          UCB::LDAP.authenticate config['username'], config['password']
-        end
+      def initialize_ldap
+        username = config.fetch("username", "")
+        password = config.fetch("password", "")
+        host = config.fetch("host", "")
+        UCB::LDAP.initialize username, password, host
       end
 
       def test_entries
-        UCB::LDAP::Person.include_test_entries = config.fetch('include_test_entries', default_include_test_entries)
+        UCB::LDAP::Person.include_test_entries = config.fetch("include_test_entries", default_include_test_entries)
       end
 
       def default_host
-        Rails.env.production? ? 'nds.berkeley.edu' : 'nds-test.berkeley.edu'
+        "nds.berkeley.edu"
       end
 
       def default_include_test_entries
