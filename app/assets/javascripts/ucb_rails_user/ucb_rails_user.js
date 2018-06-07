@@ -34,6 +34,6 @@ $( window ).on("load", function() {
   window.setTimeout(addDatatablesToUsersTable, 100)
 
   $('.user-search-form').on('submit', function() {
-    $('.loader').show()
+    $('.ucb-rails-user-loader').show()
   })
 })
