@@ -1,13 +1,13 @@
 // the users table has width set to auto, but the pagination tries to stretch to full width - this
 // forces the pagination to match the table
 var resizePagination = function () {
-  var paginationDiv = $('.dataTables_info').parents('.row').first()
-  paginationDiv.width($('.dataTable').width())
+  //var paginationDiv = $('.dataTables_info').parents('.row').first()
+  //paginationDiv.width($('.dataTable').width())
 }
 
 var addDatatablesToSearchResults = function () {
   $('.add-user-search-results-table').dataTable({
-    searching: false,
+    searching: true,
     order: [[ 2, "asc" ]],
     columnDefs: [ {
       targets: 3,
@@ -24,8 +24,10 @@ var addDatatablesToUsersTable = function () {
     columnDefs: [ {
       targets: [8, 9],
       orderable: false
-    }]
+    }],
   })
+  var addNewHtml = '&nbsp;&nbsp;<a href="/admin/users/new" class="btn btn-primary">Add New</a>'
+  $('#DataTables_Table_0_filter').append(addNewHtml)
 }
 
 $( window ).on("load", function() {
@@ -34,6 +36,8 @@ $( window ).on("load", function() {
   window.setTimeout(addDatatablesToUsersTable, 100)
 
   $('.user-search-form').on('submit', function() {
+    $('.search-results').hide()
     $('.ucb-rails-user-loader').show()
   })
 })
+
