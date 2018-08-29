@@ -8,7 +8,7 @@ A [Rails engine](http://guides.rubyonrails.org/engines.html) that provides authe
   * controller filters that block access to resources unless user is logged in
   * a default home page that reflects user's login status
   * admin screens for updating and deleting user records
-  
+
 This engine also includes the [Datatables](https://datatables.net/) JQuery plug-in, which is used in the user management screens. Host apps can make use of this as well.
 
 ## Prerequisites
@@ -127,6 +127,44 @@ skip_before_action :ensure_authenticated_user
 ```
 
 `UsersController` uses `ensure_admin_user` as a `before_filter`
+
+## Testing Support
+
+This engine comes with a few features to help with testing.
+
+The `UcbRailsUser::UserSessionManager::TestSessionManager` is a specialized session manager designed for test cases. It overrides the `login` method to lookup the given `uid` in the `users` table of the database. As long as the user record already exists, the `login` method will return successfully.
+
+There is also a `UcbRailsUser::SpecHelpers` module that provides some support methods. Specifically, the `login_user` method can be used in request or integration specs to perform the behind-the-scenes work needed to login a given user. This method is implemented according to the [omniauth gem documentation.](https://github.com/omniauth/omniauth/wiki/Integration-Testing)
+
+To add the testing support, add the following lines to your `spec_helper.rb` or `rails_helper.rb` file:
+
+```ruby
+# add this line
+require 'ucb_rails_user/spec_helpers'
+
+# then, somewhere in this block...
+RSpec.configure do |config|
+
+  ...
+
+  # ...add these lines
+  config.include UcbRailsUser::SpecHelpers
+  UcbRailsUser.config do |config|
+    config.user_session_manager = "UcbRailsUser::UserSessionManager::TestSessionManager"
+  end
+```
+
+Then, from within any request or integration spec, you should be able to do this:
+
+```ruby
+  it "should do some neato feature" do
+    user = create(:user) # assumes you've added FactoryBot or similiar
+    login_user(user)
+  end
+```
+
+and the user should now be logged in.
+
 
 ## Overriding Model And Controller Behavior
 
