@@ -139,11 +139,15 @@ There is also a `UcbRailsUser::SpecHelpers` module that provides some support me
 To add the testing support, add the following lines to your `spec_helper.rb` or `rails_helper.rb` file:
 
 ```ruby
+# add this line
+require 'ucb_rails_user/spec_helpers'
+
+# then, somewhere in this block...
 RSpec.configure do |config|
 
   ...
 
-
+  # ...add these lines
   config.include UcbRailsUser::SpecHelpers
   UcbRailsUser.config do |config|
     config.user_session_manager = "UcbRailsUser::UserSessionManager::TestSessionManager"
