@@ -1,3 +1,8 @@
+1.1.0
+------
+
+Add better testing support ([#6](https://github.com/ucb-ist-eas/ucb_rails_user/pull/6))
+
 1.0.0
 ------
 
