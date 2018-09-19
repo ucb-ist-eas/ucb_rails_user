@@ -29,11 +29,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "ucb_ldap", "~> 3.0"
 
-  # TODO: it would be nice to remove these, but that involves some rewriting
-  s.add_dependency "bootstrap-view-helpers", "~> 0.0.14"
-  # This is pinned to Rails 4 - we have a Rails 5 branch, so it will have to go into the Gemfile of the host
-  #s.add_dependency "rails_view_helpers", "~> 0.0.4"
-
   s.add_development_dependency "sqlite3", "~> 1.3"
   s.add_development_dependency "rspec-rails", "~> 3.5"
 end
