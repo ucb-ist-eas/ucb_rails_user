@@ -14,5 +14,8 @@ module UcbRailsUser
       )
     end
 
+    def checkmark(bool, true_string="&#10004;".html_safe, false_string="nbsp;".html_safe)
+      bool ? true_string : false_string
+    end
   end
 end
