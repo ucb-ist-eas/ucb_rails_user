@@ -8,9 +8,6 @@ require "omniauth-cas"
 require "ucb_ldap"
 require "active_attr"
 
-require "bootstrap-view-helpers"
-#require "rails_view_helpers"
-
 module UcbRailsUser
 
   def self.logger
