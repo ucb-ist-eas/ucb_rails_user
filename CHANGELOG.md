@@ -1,3 +1,8 @@
+1.1.1
+------
+
+Make the user admin table responsive ([7ad233e](https://github.com/ucb-ist-eas/ucb_rails_user/commit/7ad23e388edd9cfa805fce9b44bc4680bced9968))
+
 1.1.0
 ------
 
