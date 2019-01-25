@@ -1,3 +1,8 @@
+1.1.2
+-----
+
+Correctly fetch student id from LDAP ([29f724](https://github.com/ucb-ist-eas/ucb_rails_user/commit/29f724084ae1de1dbf5cdbf6d670ed393453b0fd))
+
 1.1.1
 ------
 
