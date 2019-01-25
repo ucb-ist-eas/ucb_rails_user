@@ -12,38 +12,11 @@ describe UcbRailsUser::Configuration::Ldap do
       klass.configure(config)
     end
 
-    context 'not production' do
-      it "sets test host" do
-        klass.configure(config)
-        expect(ldap.host).to eq('nds-test.berkeley.edu')
-        expect(UCB::LDAP::Person.include_test_entries?).to be_truthy
-      end
-    end
-
-    context 'production' do
-      before {
-        allow(Rails).to receive(:env) {
-          ActiveSupport::StringInquirer.new("production")
-        }
-      }
-
-      it "sets production host" do
-        klass.configure(config)
-        expect(ldap.host).to eq('nds.berkeley.edu')
-        expect(UCB::LDAP::Person.include_test_entries?).to be_falsey
-      end
-    end
-
   end
 
   context 'configuration passed' do
     let(:config) { {'host' => 'HOST', 'username' => 'USERNAME', 'password' => 'PASSWORD', 'include_test_entries' => true } }
     before { allow(ldap).to receive(:authenticate) }
-
-    it "authenticates" do
-      expect(ldap).to receive(:authenticate).with('USERNAME', 'PASSWORD')
-      klass.configure(config)
-    end
 
     context 'not production' do
       it "sets test host" do

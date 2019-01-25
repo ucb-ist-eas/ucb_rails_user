@@ -44,7 +44,7 @@ module UcbRailsUser::LdapPerson
           :uid => ldap_entry.uid,
           :calnet_id => ldap_entry.berkeleyedukerberosprincipalstring.first,
           :employee_id => ldap_entry.employeenumber,
-          :student_id => ldap_entry.attributes["student_id"],
+          :student_id => ldap_entry.berkeleyedustuid,
           :first_name => ldap_entry.givenname.first,
           :last_name => ldap_entry.sn.first,
           :email => ldap_entry.mail.first,

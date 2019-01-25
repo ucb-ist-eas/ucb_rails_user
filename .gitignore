@@ -53,3 +53,5 @@ bower.json
 coverage
 
 *.gem
+
+spec/dummy/log
