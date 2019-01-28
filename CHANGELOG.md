@@ -1,3 +1,8 @@
+1.1.3
+-----
+
+Make sure all user attributes are included when updating an existing user record([57c0a9](https://github.com/ucb-ist-eas/ucb_rails_user/commit/57c0a9b9162bf42f9469a79d6f9b04c4777581a4))
+
 1.1.2
 -----
 
