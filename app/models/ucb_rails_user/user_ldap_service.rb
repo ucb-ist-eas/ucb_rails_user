@@ -36,9 +36,12 @@ class UcbRailsUser::UserLdapService
 
       User.find_by_ldap_uid!(ldap_entry.uid).tap do |user|
         user.employee_id = ldap_entry.employee_id if user.respond_to?(:employee_id=)
+        user.affiliate_id = ldap_entry.affiliate_id
+        user.student_id = ldap_entry.student_id
         user.first_name = ldap_entry.first_name
         user.last_name = ldap_entry.last_name
         user.email = ldap_entry.email
+        user.inactive_flag = ldap_entry.inactive
         user.save(validate: false)
       end
     end
