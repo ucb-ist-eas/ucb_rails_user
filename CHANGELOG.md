@@ -1,3 +1,8 @@
+2.0.0
+-----
+
+Switch the user's `employee_id` to the new UCPath ID ([PR #8](https://github.com/ucb-ist-eas/ucb_rails_user/pull/8))
+
 1.1.3
 -----
 

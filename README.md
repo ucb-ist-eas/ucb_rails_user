@@ -11,6 +11,10 @@ A [Rails engine](http://guides.rubyonrails.org/engines.html) that provides authe
 
 This engine also includes the [Datatables](https://datatables.net/) JQuery plug-in, which is used in the user management screens. Host apps can make use of this as well.
 
+## Conversion to UCPath
+
+Version 2.0 and greater of this gem sets a user's `employee_id` to the new UCPath employee id, rather than the legacy HCM employee id. If you need to use the older ID, use version 1.1.3 of this gem, or lower.
+
 ## Prerequisites
 
   * Ruby >= 2.3
