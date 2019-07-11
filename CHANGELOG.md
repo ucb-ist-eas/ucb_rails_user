@@ -1,3 +1,8 @@
+2.0.1
+-----
+
+Minor release for a style change ([PR #10](https://github.com/ucb-ist-eas/ucb_rails_user/pull/10))
+
 2.0.0
 -----
 
