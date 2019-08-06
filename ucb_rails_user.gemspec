@@ -29,6 +29,13 @@ Gem::Specification.new do |s|
 
   s.add_dependency "ucb_ldap", "~> 3.0"
 
+  s.add_development_dependency "puma", "~> 3.11"
   s.add_development_dependency "sqlite3", "~> 1.3", '< 1.4'
   s.add_development_dependency "rspec-rails", "~> 3.5"
+  s.add_development_dependency "factory_bot_rails"
+  s.add_development_dependency "faker"
+  s.add_development_dependency "capybara", "~> 3.0"
+  s.add_development_dependency "capybara-screenshot"
+  s.add_development_dependency "selenium-webdriver"
+  s.add_development_dependency "chromedriver-helper"
 end

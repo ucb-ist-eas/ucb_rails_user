@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe UcbRailsUser::Configuration::Configuration do
-  let(:test_config_file) { UcbRailsUser::Engine.root.join('spec/fixtures/config.yml')}
+  let(:test_config_file) { UcbRailsUser::Engine.root.join('spec/config.yml')}
   let(:config) { UcbRailsUser::Configuration::Configuration.new(test_config_file) }
 
   describe '.initialize' do

@@ -35,7 +35,6 @@ module UcbRailsUser::Concerns::SessionsController
     user_session_manager.logout(current_user)
     provider = session[:omniauth_provider]
     reset_session
-    p "using #{redirect_url(provider)}"
     redirect_to redirect_url(provider)
   end
 

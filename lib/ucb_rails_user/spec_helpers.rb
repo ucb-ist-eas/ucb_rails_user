@@ -9,6 +9,12 @@ module UcbRailsUser
       follow_redirect!
     end
 
+    def system_login_user(user)
+      OmniAuth.config.test_mode = true
+      auth_mock(user.ldap_uid)
+      visit login_path()
+    end
+
     def auth_mock(uid)
       OmniAuth.config.mock_auth[:cas] = OmniAuth::AuthHash.new(
         provider: "cas",

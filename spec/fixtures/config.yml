@@ -1,9 +1,0 @@
-test:
-  foo:
-    username: test_username
-    password: test_password
-
-foo:
-  username: top_username
-  password: top_password
-  

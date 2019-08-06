@@ -55,3 +55,10 @@ coverage
 *.gem
 
 spec/dummy/log
+spec/dummy/tmp
+spec/dummy/config/config.yml
+spec/dummy/config/database.yml
+spec/dummy/config/ldap.yml
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/public/system
