@@ -1,0 +1,11 @@
+# just used for testing - this should be removed when we get rid of
+# UcbRails::Configuration::Configuration (https://github.com/ucb-ist-eas/ucb_rails_user/issues/9)
+test:
+  foo:
+    username: test_username
+    password: test_password
+
+foo:
+  username: top_username
+  password: top_password
+
