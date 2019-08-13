@@ -1,0 +1,20 @@
+%h1 Impersonate user
+
+- if current_user.impersonating?
+  .clear-impersonation
+    = link_to "Stop impersonating #{current_user.impersonation_target.full_name}", admin_stop_impersonation_path(), class: "btn btn-primary"
+- else
+  .impersonation-form
+    = simple_form_for UcbRailsUser::Impersonation.new, url: admin_impersonations_path(), method: :post do |f|
+      = f.input :target, label: "User", input_html: { class: "typeahead" }
+      = f.input :target_id, as: :hidden
+      = f.button :submit, value: "Impersonate", class: "btn btn-primary", disabled: true, data: { impersonate_button: true }
+
+.recent-impersonations
+  - if current_user.recent_impersonations.present?
+    %h3 Recent impersonations
+    %ul
+      - current_user.recent_impersonations.each do |imp|
+        %li= link_to imp.target.full_name, admin_impersonations_path() + "?ucb_rails_user_impersonation[target_id=#{imp.target.id}]", method: :post
+  - else
+    %h4 No recent impersonations

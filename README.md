@@ -8,6 +8,7 @@ A [Rails engine](http://guides.rubyonrails.org/engines.html) that provides authe
   * controller filters that block access to resources unless user is logged in
   * a default home page that reflects user's login status
   * admin screens for updating and deleting user records
+  * ability for admins to impersonate other users
 
 This engine also includes the [Datatables](https://datatables.net/) JQuery plug-in, which is used in the user management screens. Host apps can make use of this as well.
 
@@ -158,7 +159,7 @@ RSpec.configure do |config|
   end
 ```
 
-Then, from within any request or integration spec, you should be able to do this:
+Then, from within any request spec, you should be able to do this:
 
 ```ruby
   it "should do some neato feature" do
@@ -168,6 +169,8 @@ Then, from within any request or integration spec, you should be able to do this
 ```
 
 and the user should now be logged in.
+
+For system specs, the logic is a little different - use `system_login_user` rather than `login_user` in these specs.
 
 
 ## Overriding Model And Controller Behavior
@@ -195,6 +198,12 @@ class UcbRailsUser::UsersController < ApplicationController
 
 end
 ```
+
+## Impersonation Permissions
+
+The impersonation feature allows admins to login as a different user in the system. This is useful when trying to diagnose data-specific problems, as the admin can see exactly what the user sees.
+
+By default, this feature is only available to superusers, but you can change this by overriding the `User#can_impersonate?` method and implementing any logic you prefer. See "Overriding Model And Controller Behavior" to see how to override methods in the `User` class.
 
 ## Overriding The Default Home Page
 

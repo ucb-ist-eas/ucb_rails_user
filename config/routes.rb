@@ -15,6 +15,12 @@ Rails.application.routes.draw do
 
   match "/admin/users/search", to: UcbRailsUser::UsersController.action(:search),
     as: "admin_user_search", via: [:get]
+  match "/admin/users/impersonate_search", to: UcbRailsUser::UsersController.action(:impersonate_search),
+    as: "admin_user_impersonate_search", via: [:get]
   resources :users, controller: "ucb_rails_user/users", path: "admin/users", as: :admin_users
+
+  resources :impersonations, controller: "ucb_rails_user/impersonations", path: "admin/impersonations", as: :admin_impersonations
+  match "/admin/stop_impersonation", to: UcbRailsUser::ImpersonationsController.action(:stop_impersonation),
+    as: :admin_stop_impersonation, via: [:get]
 
 end
