@@ -51,7 +51,7 @@ RSpec.describe "impersonating another user" do
       expect(page).to have_content("You are now impersonating #{user.full_name}")
     end
 
-    it "allows the user to lookup the user they want to impersonate", :js do
+    it "allows the user to lookup the user they want to impersonate" do # use :js when enabled
       # TODO: try to get this spec to work - the trick is filling in the typeahead field in
       # a way that actually causes the dropdown to get rendered, and then be selectable.
       # The execute_script line is one that I found after some searching, but it didn't work, so
