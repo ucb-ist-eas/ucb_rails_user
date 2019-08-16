@@ -1,3 +1,8 @@
+3.0.0
+-----
+
+Add user impersonation feature([PR #13](https://github.com/ucb-ist-eas/ucb_rails_user/pull/13))
+
 2.0.1
 -----
 
