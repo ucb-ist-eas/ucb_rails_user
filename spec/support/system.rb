@@ -8,6 +8,8 @@ RSpec.configure do |config|
     driven_by :selenium_chrome_headless
   end
 
+  require "capybara-screenshot/rspec"
+
 end
 
 
