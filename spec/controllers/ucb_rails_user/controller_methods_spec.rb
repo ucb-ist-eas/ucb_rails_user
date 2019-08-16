@@ -5,7 +5,7 @@ describe UcbRailsUser::Concerns::ControllerMethods do
 
   describe '#logged_in?' do
     it "true" do
-      allow(controller).to receive(:current_user) { double('user') }
+      allow(controller).to receive(:logged_in_user) { double('user') }
       expect(controller).to be_logged_in
     end
 

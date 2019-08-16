@@ -1,0 +1,45 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+    %title Dummy App
+
+
+    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,800", :rel => "stylesheet"}
+    %link{:href => "http://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600,700", :rel => "stylesheet"}>
+    %link{:href => "https://use.typekit.net/oon3msv.css", :rel => "stylesheet"}
+    %link{:rel => "stylesheet", :href => "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", :integrity => "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", :crossorigin => "anonymous"}
+    %link{:rel => "stylesheet", :href => "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" }
+    %link{:rel => "stylesheet", :href => "https://jqueryui.com/resources/demos/style.css" }
+
+    = stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => false
+
+    = csrf_meta_tags
+
+    %script{:src => "https://code.jquery.com/jquery-3.3.1.min.js", :integrity => "sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=", :crossorigin => "anonymous"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js", :integrity => "sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49", :crossorigin => "anonymous"}
+    %script{:src => "https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js", :integrity => "sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em", :crossorigin => "anonymous"}
+
+    = javascript_tag "window._token = '#{form_authenticity_token}'"
+    = javascript_include_tag "application"
+
+    = yield(:head)
+
+  %body{data: {controller: controller.controller_name, action: controller.action_name}}
+
+    =# render 'layouts/navigation'
+
+    #main{:role => "main"}
+      - if logged_in?
+        -#= user_announcements
+      .container
+        %div
+          - flash_mapping = {:notice => :info, :alert => :danger, :error => :danger }
+          - messages = flash.map { |type, message| content_tag(:div, message, class: "alert alert-#{flash_mapping[type.to_sym] || type}", role: "alert") }
+          = safe_join(messages, "\n")
+        %div
+          = yield
+
+    =# render partial: 'layouts/footer'
+

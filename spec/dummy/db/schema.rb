@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324221936) do
+ActiveRecord::Schema.define(version: 2019_08_07_231505) do
+
+  create_table "impersonations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "target_id", null: false
+    t.boolean "active", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["target_id"], name: "index_impersonations_on_target_id"
+    t.index ["user_id"], name: "index_impersonations_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "ldap_uid", null: false

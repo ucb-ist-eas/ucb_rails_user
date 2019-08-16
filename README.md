@@ -8,12 +8,17 @@ A [Rails engine](http://guides.rubyonrails.org/engines.html) that provides authe
   * controller filters that block access to resources unless user is logged in
   * a default home page that reflects user's login status
   * admin screens for updating and deleting user records
+  * ability for admins to impersonate other users
 
-This engine also includes the [Datatables](https://datatables.net/) JQuery plug-in, which is used in the user management screens. Host apps can make use of this as well.
+This engine also includes the [Datatables](https://datatables.net/) JQuery plug-in, which is used in the user management screens, and [typeahead.js](https://github.com/twitter/typeahead.js) for autocomplete. Host apps can make use of these libraries as well.
 
 ## Conversion to UCPath
 
 Version 2.0 and greater of this gem sets a user's `employee_id` to the new UCPath employee id, rather than the legacy HCM employee id. If you need to use the older ID, use version 1.1.3 of this gem, or lower.
+
+## Upgrading to version 3.0 from version 2.x
+
+See [this wiki page](https://github.com/ucb-ist-eas/ucb_rails_user/wiki/Upgrading-to-version-3.0) for details.
 
 ## Prerequisites
 
@@ -33,7 +38,6 @@ But if you need to add this to an already-existing app, do the following:
 ```ruby
 gem "ucb_rails_user", github: "ucb-ist-eas/ucb_rails_user"
 gem "ucb_ldap", github: "ucb-ist-eas/ucb-ldap"
-gem "rails_view_helpers", github: "ucb-ist-eas/rails_view_helpers", branch: "rails5"
 ```
 
 then run `bundler` to install them:
@@ -42,17 +46,7 @@ then run `bundler` to install them:
 bundle install
 ```
 
-2. Create a file named `config.yml` in the `config` directory, and copy this into it:
-
-```yml
-ldap:
-  username: LDAP_USERNAME
-  password: LDAP_PASSWORD
-```
-
-Replace `LDAP_USERNAME` and `LDAP_PASSWORD` with the proper credentials - you can get these from another developer.
-
-**IMPORTANT** Be sure to add `config/config.yml` to your `.gitignore` so that the username and password are not saved to source control.
+2. Set the `RAILS_MASTER_KEY` environment variable and setup an encrypted credentials file containing (at least) the credentials needed to connect to LDAP (ask another dev to help get this setup for you).
 
 3. Add this line to your host app's `ApplicationController:`
 
@@ -68,7 +62,7 @@ include UcbRailsUser::Concerns::ControllerMethods
 root to: UcbRailsUser::HomeController.action(:index)
 ```
 
-6. Copy the migrations for the `User` model from the engine into your host app, and run them:
+6. Copy the migrations for the `User` and `Impersonation` models from the engine into your host app, and run them:
 
 ```
 bin/rails railties:install:migrations
@@ -97,6 +91,8 @@ You should be able to access the following routes:
   * `/login`: this should redirect you to the main CAS login page
   * `/logout`: this should log you out of CAS and redirect you back to the host app
   * `/admin/users`: this should display the user management screen, if your user account has the `superuser` flag set; otherwise, you'll see a 401 page
+  * `/admin/impersonations`: this is the page used to start impersonating another user (see below)
+  * `/admin/stop_impersonation`: this stops an active impersonation
   * `/admin/users/toggle_superuser`: in dev mode, you can use this url to turn the superuser flag of your account on and off
 
 ## Routing
@@ -109,18 +105,49 @@ For example, if the admin screens for your app are under the `/backend` path rat
 resources :users, controller: "ucb_rails_user/users", path: "backend/users", as: :backend_users
 ```
 
+## User Impersonation
+
+The impersonation feature allows admins to be logged in as a different user in the system. This is useful when trying to diagnose data-specific problems, as the admin can see exactly what the user sees.
+
+### Impersonation Permissions
+
+By default, this feature is only available to superusers, but you can change this by overriding the `User#can_impersonate?` method and implementing any logic you prefer. See "Overriding Model And Controller Behavior" to see how to override methods in the `User` class.
+
+### Determining Who The Real User Is
+
+In the past, this gem provided a controller and helper method called `current_user` which returned the `User` record associated with the logged-in user. With the impersonation feature in place, this behavior changes slightly.
+
+As of version 3.0, `current_user` returns the currently logged-in user, unless that user is impersonating another user. In that case, `current_user` will return the impersonated user (referred to as the impersonation "target" in the code). Most of our existing apps rely on `current_user` to determine what should or should not be displayed, so the impersonation feature will work best for existing apps if `current_user` returns the impersonated user.
+
+Version 3.0 also adds a new method called `logged_in_user` that always returns the actual logged-in user (whether or not that user is impersonating someone else).
+
+For example:
+
+Alice is an admin who has logged into the system:
+   * `logged_in_user` returns Alice
+   * `current_user` returns Alice
+
+Alice then starts impersonating Bob:
+   * `logged_in_user` returns Alice
+   * `current_user` returns Bob
+
+Alice stops impersonating Bob:
+   * `logged_in_user` returns Alice
+   * `current_user` returns Alice
+
 ## Controller Methods
 
 If you followed the setup instructions above, your `ApplicationController` should be including `UcbRails::Concerns::ControllerMethods.` This provides a number of utility methods you can use in your controllers:
 
-  * `current_user`: returns the `User` instance for the currently logged-in user, or `nil` if user is not logged in
+  * `current_user`: returns the `User` instance for the currently logged-in user, or `nil` if user is not logged in. If the logged-in user is impersonating another user, this will return the impersonated user
+  * `logged_in_user`: this returns the user who logged in with their Calnet credentials, even if that user is impersonating another user
   * `current_ldap_person`: returns the `UCB::LDAP::Person` instance for the currently logged-in user, or `nil` if user is not logged in
   * `logged_in?`: returns true if the user is logged in
   * `superuser?`: returns true if the current user has the superuser flag set to true
   * `ensure_authenticated_user`: returns a 401 error if the user is not logged in
   * `ensure_admin_user`: returns a 401 error if the user is not a superuser
 
-`current_user`, `current_ldap_person`, `logged_in?` and `superuser?` are all helper methods, so you can use them in views as well as controllers.
+`current_user`, `logged_in_user`, `current_ldap_person`, `logged_in?` and `superuser?` are all helper methods, so you can use them in views as well as controllers.
 
 `ensure_authenticated_user` is set as a `before_filter` so by default, all pages will require a login (except the `HomeController` included in this gem).
 
@@ -158,7 +185,7 @@ RSpec.configure do |config|
   end
 ```
 
-Then, from within any request or integration spec, you should be able to do this:
+Then, from within any request spec, you should be able to do this:
 
 ```ruby
   it "should do some neato feature" do
@@ -168,6 +195,8 @@ Then, from within any request or integration spec, you should be able to do this
 ```
 
 and the user should now be logged in.
+
+*NOTE:* For system specs, the logic is a little different - use `system_login_user` rather than `login_user` in these specs.
 
 
 ## Overriding Model And Controller Behavior

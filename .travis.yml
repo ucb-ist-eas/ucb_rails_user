@@ -1,0 +1,24 @@
+branches:
+  except:
+  - "/^.*-\\d+$/"
+  - "/^.*\\/.*+$/"
+services:
+- postgresql
+language: ruby
+rvm:
+- 2.6.3
+addons:
+  chrome: stable
+before_install:
+  - # start your web application and listen on `localhost`
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+install: true
+script:
+- bin/setup
+before_deploy:
+- git tag $TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER
+cache:
+  directories:
+  - vendor/bundle
+notifications:
+  slack: infinitered:4s2uT0dj614H6BUJteVhFGqo

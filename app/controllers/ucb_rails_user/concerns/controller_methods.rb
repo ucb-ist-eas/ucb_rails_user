@@ -11,18 +11,22 @@ module UcbRailsUser::Concerns::ControllerMethods
 
     after_action  :remove_user_settings
 
-    helper_method :superuser?, :current_ldap_person, :current_user, :logged_in?
+    helper_method :superuser?, :current_ldap_person, :current_user, :logged_in?, :logged_in_user
   end
 
   def superuser?
     current_user.try(:superuser?)
   end
 
-  def current_user
-    @current_user ||= begin
-      logger.debug 'recalc of current_user'
-      user_session_manager.current_user(session[:uid])
+  def logged_in_user
+    @logged_in_user ||= begin
+      logger.debug 'recalc of logged_in_user'
+      user_session_manager&.current_user(session[:uid])
     end
+  end
+
+  def current_user
+    logged_in_user&.impersonation_target || logged_in_user
   end
 
   # Returns +true+ if there is a logged in user
@@ -30,7 +34,7 @@ module UcbRailsUser::Concerns::ControllerMethods
   # @return [true] if user logged in
   # @return [false] if user not logged in
   def logged_in?
-    current_user.present?
+    logged_in_user.present?
   end
 
   def log_request

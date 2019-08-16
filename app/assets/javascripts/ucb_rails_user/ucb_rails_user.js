@@ -30,6 +30,20 @@ var addDatatablesToUsersTable = function () {
   $('#DataTables_Table_0_filter').append(addNewHtml)
 }
 
+var resetImpersonateButton = function() {
+  var targetId = $('#ucb_rails_user_impersonation_target_id').val()
+  if (targetId != null && targetId.toString().length > 0) {
+    $('input[data-impersonate-button]').removeAttr('disabled')
+  } else {
+    $('input[data-impersonate-button]').attr('disabled', 'disabled')
+  }
+}
+
+var clearImpersonateSelection = function() {
+  $('#ucb_rails_user_impersonation_target_id').val('')
+  resetImpersonateButton()
+}
+
 $( window ).on("load", function() {
   // the datatable calling was failing intermittently, but adding the timeout
   // seemed to fix it, so ¯\_(ツ)_/¯
@@ -39,5 +53,46 @@ $( window ).on("load", function() {
     $('.search-results').hide()
     $('.ucb-rails-user-loader').show()
   })
+
+  var usersSource = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: '/admin/users/impersonate_search?q=%QUERY',
+      wildcard: '%QUERY'
+    }
+  });
+
+  $('#ucb_rails_user_impersonation_target').typeahead(null, {
+    name: 'users',
+    source: usersSource,
+    display: 'name',
+    templates: {
+      empty: [
+        '<div class="empty-message">',
+        'No match found',
+        '</div>'
+      ].join('\n'),
+      suggestion: function (data) {
+        return '<div><strong>' + data.name + '</strong></div>'
+      }
+    }
+  });
+
+  $('#ucb_rails_user_impersonation_target').keyup(function(event) {
+    if ($(event.target).val().length == 0) {
+      clearImpersonateSelection()
+    }
+  })
+
+  $('#ucb_rails_user_impersonation_target').bind('typeahead:open', function(event, suggestion) {
+    clearImpersonateSelection()
+  })
+
+  $('#ucb_rails_user_impersonation_target').bind('typeahead:select', function(event, suggestion) {
+    $('#ucb_rails_user_impersonation_target_id').val(suggestion.id)
+    resetImpersonateButton()
+  })
+
 })
 
