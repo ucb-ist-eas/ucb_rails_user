@@ -74,7 +74,7 @@ $( window ).on("load", function() {
         '</div>'
       ].join('\n'),
       suggestion: function (data) {
-        return '<div><strong>' + data.name + '</strong></div>'
+        return '<div><strong>' + data.name + '</strong> (' + data.uid + ')</div>'
       }
     }
   });

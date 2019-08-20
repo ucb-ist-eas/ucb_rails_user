@@ -28,7 +28,7 @@ module UcbRailsUser::Concerns::UsersController
 
   def impersonate_search
     result = UcbRailsUser::UserSearch.find_users_by_name(params[:q])
-    render json: result.map { |u| { name: u.full_name, id: u.id } }
+    render json: result.map { |u| { name: u.full_name, id: u.id, uid: u.ldap_uid } }
   end
 
   def edit
