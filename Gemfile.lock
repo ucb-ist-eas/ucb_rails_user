@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ucb_rails_user (2.0.1)
+    ucb_rails_user (3.0.0)
       active_attr (~> 0.10)
       haml (~> 5.0)
       haml-rails (~> 1.0)
@@ -240,7 +240,7 @@ PLATFORMS
 DEPENDENCIES
   capybara (~> 3.0)
   capybara-screenshot
-  chromedriver-helper (= 2.1.0)
+  chromedriver-helper
   factory_bot_rails
   faker
   puma (~> 3.11)

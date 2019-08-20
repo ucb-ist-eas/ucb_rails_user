@@ -113,8 +113,8 @@ module UcbRailsUser::Concerns::UsersController
 
   private
 
-  def user_params
-    params.require(:user).permit(
+  def user_params(extra_params = [])
+    params.require(:user).permit([
       :superuser_flag,
       :inactive_flag,
       :first_name,
@@ -125,7 +125,7 @@ module UcbRailsUser::Concerns::UsersController
       :last_request_at,
       :last_logout_at,
       :last_login_at,
-      :uid
+      :uid] + extra_params
     )
   end
 
