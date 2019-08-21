@@ -67,6 +67,7 @@ $( window ).on("load", function() {
     name: 'users',
     source: usersSource,
     display: 'name',
+    limit: 7, // any higher than this, and the results don't display properly
     templates: {
       empty: [
         '<div class="empty-message">',
