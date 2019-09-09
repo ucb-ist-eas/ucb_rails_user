@@ -28,7 +28,7 @@ module UcbRailsUser::Concerns::UsersController
 
   def impersonate_search
     result = UcbRailsUser::UserSearch.find_users_by_name(params[:q])
-    render json: result.map { |u| { name: u.full_name, id: u.id } }
+    render json: result.map { |u| { name: u.full_name, id: u.id, uid: u.ldap_uid } }
   end
 
   def edit
@@ -113,8 +113,8 @@ module UcbRailsUser::Concerns::UsersController
 
   private
 
-  def user_params
-    params.require(:user).permit(
+  def user_params(extra_params = [])
+    params.require(:user).permit([
       :superuser_flag,
       :inactive_flag,
       :first_name,
@@ -125,7 +125,7 @@ module UcbRailsUser::Concerns::UsersController
       :last_request_at,
       :last_logout_at,
       :last_login_at,
-      :uid
+      :uid] + extra_params
     )
   end
 

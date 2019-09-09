@@ -14,6 +14,16 @@ RSpec.describe UcbRailsUser::UserSearch do
     expect(result).to eq([ricardo])
   end
 
+  it "finds user by first name substring" do
+    result = UcbRailsUser::UserSearch.find_users_by_name("Rica")
+    expect(result).to eq([ricardo])
+  end
+
+  it "finds user by last name substring" do
+    result = UcbRailsUser::UserSearch.find_users_by_name("monta")
+    expect(result).to eq([ricardo])
+  end
+
   it "is case-insenstive" do
     result = UcbRailsUser::UserSearch.find_users_by_name("montalban")
     expect(result).to eq([ricardo])

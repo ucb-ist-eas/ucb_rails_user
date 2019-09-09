@@ -15,6 +15,6 @@
     %h3 Recent impersonations
     %ul
       - current_user.recent_impersonations.each do |imp|
-        %li= link_to imp.target.full_name, admin_impersonations_path() + "?ucb_rails_user_impersonation[target_id=#{imp.target.id}]", method: :post
+        %li= link_to full_name_with_uid(imp.target), admin_impersonations_path() + "?ucb_rails_user_impersonation[target_id=#{imp.target.id}]", method: :post
   - else
     %h4 No recent impersonations
