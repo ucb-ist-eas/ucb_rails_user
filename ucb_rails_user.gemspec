@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency "haml", "~> 5.0"
   s.add_dependency "haml-rails", "~> 1.0"
   s.add_dependency "active_attr", "~> 0.10"
-  s.add_dependency "simple_form", "~> 4.0"
+  s.add_dependency "simple_form", ">= 4", "< 6"
 
   s.add_dependency "omniauth", "~> 1.8"
   s.add_dependency "omniauth-cas", "~> 1.1"
