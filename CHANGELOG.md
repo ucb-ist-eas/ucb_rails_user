@@ -1,3 +1,10 @@
+4.0.0.beta1
+-----
+
+Security upgrade to dependencies(PR [#16](https://github.com/ucb-ist-eas/ucb_rails_user/pull/16), [#17](https://github.com/ucb-ist-eas/ucb_rails_user/pull/17), [#18](https://github.com/ucb-ist-eas/ucb_rails_user/pull/18), [#18](https://github.com/ucb-ist-eas/ucb_rails_user/pull/18), [#19](https://github.com/ucb-ist-eas/ucb_rails_user/pull/19), [#20](https://github.com/ucb-ist-eas/ucb_rails_user/pull/20))
+
+Upgrade to Rails 6(PR [#22](https://github.com/ucb-ist-eas/ucb_rails_user/pull/22))
+
 3.0.1
 -----
 
