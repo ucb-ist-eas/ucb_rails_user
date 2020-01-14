@@ -2,7 +2,6 @@ require "ucb_rails_user/engine"
 
 require "haml"
 require "haml-rails"
-require "sass-rails"
 require "omniauth"
 require "omniauth-cas"
 require "ucb_ldap"
