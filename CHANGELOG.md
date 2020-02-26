@@ -1,7 +1,7 @@
 3.0.2
 -----
 
-Apply security fixes([PR #16](https://github.com/ucb-ist-eas/ucb_rails_user/pull/16), [PR #17](https://github.com/ucb-ist-eas/ucb_rails_user/pull/17), [PR #18](https://github.com/ucb-ist-eas/ucb_rails_user/pull/18), [PR #19](https://github.com/ucb-ist-eas/ucb_rails_user/pull/19), [PR #20](https://github.com/ucb-ist-eas/ucb_rails_user/pull/20), [PR #24](https://github.com/ucb-ist-eas/ucb_rails_user/pull/24))
+Apply security fixes([PRs #16](https://github.com/ucb-ist-eas/ucb_rails_user/pull/16), [17](https://github.com/ucb-ist-eas/ucb_rails_user/pull/17), [18](https://github.com/ucb-ist-eas/ucb_rails_user/pull/18), [19](https://github.com/ucb-ist-eas/ucb_rails_user/pull/19), [20](https://github.com/ucb-ist-eas/ucb_rails_user/pull/20), [24](https://github.com/ucb-ist-eas/ucb_rails_user/pull/24))
 
 3.0.1
 -----
