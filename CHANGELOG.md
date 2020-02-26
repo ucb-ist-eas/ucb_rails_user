@@ -1,3 +1,10 @@
+4.0.0
+-----
+
+Security upgrade(PR [#24](https://github.com/ucb-ist-eas/ucb_rails_user/pull/24))
+
+Move out of beta phase
+
 4.0.0.beta1
 -----
 
