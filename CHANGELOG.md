@@ -1,3 +1,9 @@
+4.0.1
+-----
+
+Upgrade to haml-rails 2.x ([PR #16](https://github.com/ucb-ist-eas/ucb_rails_user/pull/26))
+
+
 4.0.0
 -----
 
