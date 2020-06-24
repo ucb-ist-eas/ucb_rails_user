@@ -2,7 +2,8 @@ module UserConcerns
   extend ActiveSupport::Concern
 
   included do
-    has_many :impersonations, class_name: "::UcbRailsUser::Impersonation"
+    has_many :impersonations, class_name: "::UcbRailsUser::Impersonation", dependent: :delete_all
+    has_many :targets, class_name: "::UcbRailsUser::Impersonation", dependent: :delete_all
   end
 
   # Overridden by application

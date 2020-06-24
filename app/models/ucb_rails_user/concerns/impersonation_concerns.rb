@@ -3,8 +3,6 @@ module UcbRailsUser::Concerns::ImpersonationConcerns
 
   included do
     belongs_to :user
-    belongs_to :target, class_name: "User"
+    belongs_to :target, class_name: 'User'
   end
-
 end
-
