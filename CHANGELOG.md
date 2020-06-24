@@ -1,7 +1,13 @@
+4.0.2
+-----
+
+Cascade deletes from `User` to `Impersonation` ([PR #36](https://github.com/ucb-ist-eas/ucb_rails_user/pull/36))
+
+
 4.0.1
 -----
 
-Upgrade to haml-rails 2.x ([PR #16](https://github.com/ucb-ist-eas/ucb_rails_user/pull/26))
+Upgrade to haml-rails 2.x ([PR #26](https://github.com/ucb-ist-eas/ucb_rails_user/pull/26))
 
 
 4.0.0
