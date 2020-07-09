@@ -56,7 +56,7 @@ module UcbRailsUser::Concerns::UsersController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       redirect_to(admin_users_path, notice: 'Record updated')
     else
       render("edit")
