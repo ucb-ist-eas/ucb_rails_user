@@ -1,3 +1,9 @@
+4.0.3
+-----
+
+Fix deprecation warnings for Rails 6 ([PR #40](https://github.com/ucb-ist-eas/ucb_rails_user/pull/40))
+
+
 4.0.2
 -----
 
