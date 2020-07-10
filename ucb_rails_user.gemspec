@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "ucb_ldap", "~> 3.0"
 
   s.add_development_dependency "puma", "~> 4.3"
-  s.add_development_dependency "sqlite3", "~> 1.3", '< 1.4'
+  s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails", "~> 3.5"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "faker"
