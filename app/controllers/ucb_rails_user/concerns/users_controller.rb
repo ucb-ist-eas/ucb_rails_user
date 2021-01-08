@@ -4,7 +4,7 @@ module UcbRailsUser::Concerns::UsersController
   included do
     before_action :find_user, :only => [:edit, :update, :destroy]
     before_action :ensure_admin_user
-    skip_before_action :ensure_admin_user, if: ->{ action_name == "toggle_superuser" && Rails.env.development? }
+    skip_before_action :ensure_admin_user, if: ->{ action_name == "toggle_superuser" && Rails.env.development? }, raise: false
   end
 
   def index
