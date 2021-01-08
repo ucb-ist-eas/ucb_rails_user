@@ -16,7 +16,7 @@ This engine also includes the [Datatables](https://datatables.net/) JQuery plug-
 
 Version 2.0 and greater of this gem sets a user's `employee_id` to the new UCPath employee id, rather than the legacy HCM employee id. If you need to use the older ID, use version 1.1.3 of this gem, or lower.
 
-## Upgrading to version 3.0 from version 2.x
+## Upgrading to version 3.0+ from version 2.x
 
 See [this wiki page](https://github.com/ucb-ist-eas/ucb_rails_user/wiki/Upgrading-to-version-3.0) for details.
 

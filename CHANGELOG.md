@@ -1,3 +1,9 @@
+4.0.4
+-----
+
+Add support for LDAP searches ([PR #48](https://github.com/ucb-ist-eas/ucb_rails_user/pull/48))
+Fix exceptions with skip_before_action ([PR #49](https://github.com/ucb-ist-eas/ucb_rails_user/pull/49))
+
 4.0.3
 -----
 
