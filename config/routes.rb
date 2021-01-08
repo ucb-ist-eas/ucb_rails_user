@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     as: "admin_user_search", via: [:get]
   match "/admin/users/impersonate_search", to: UcbRailsUser::UsersController.action(:impersonate_search),
     as: "admin_user_impersonate_search", via: [:get]
+  match "/admin/users/ldap_search", to: UcbRailsUser::UsersController.action(:ldap_search),
+    as: "admin_user_ldap_search", via: [:get]
   resources :users, controller: "ucb_rails_user/users", path: "admin/users", as: :admin_users
 
   resources :impersonations, controller: "ucb_rails_user/impersonations", path: "admin/impersonations", as: :admin_impersonations
