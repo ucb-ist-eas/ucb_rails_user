@@ -2,7 +2,7 @@ module UcbRailsUser::Concerns::HomeController
   extend ActiveSupport::Concern
 
   included do
-    skip_before_action :ensure_authenticated_user
+    skip_before_action :ensure_authenticated_user, raise: false
   end
 
   def index

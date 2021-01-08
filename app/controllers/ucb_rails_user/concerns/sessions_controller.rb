@@ -2,7 +2,7 @@ module UcbRailsUser::Concerns::SessionsController
   extend ActiveSupport::Concern
 
   included do
-    skip_before_action :ensure_authenticated_user, :log_request
+    skip_before_action :ensure_authenticated_user, :log_request, raise: false
   end
 
   # Redirects to authentication provider
