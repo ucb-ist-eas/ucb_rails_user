@@ -90,7 +90,8 @@ module UcbRailsUser::Concerns::UsersController
         params.fetch(:last_name),
         :sort => :last_first_downcase
       )
-      @lps_existing_uids = User.where(ldap_uid: @lps_entries.map(&:uid)).pluck(:uid)
+      uid_strings = @lps_entries.map { |entry| entry.uid&.to_s }.compact
+      @lps_existing_uids = User.where(ldap_uid: uid_strings).pluck(:uid)
       render 'ucb_rails_user/lps/search'
     end
 
