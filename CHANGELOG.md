@@ -1,3 +1,8 @@
+4.0.5
+-----
+
+Fix conversion of LDAP string to Ruby String ([PR #53](https://github.com/ucb-ist-eas/ucb_rails_user/pull/53))
+
 4.0.4
 -----
 
