@@ -18,11 +18,16 @@ var addDatatablesToSearchResults = function () {
 }
 
 var addDatatablesToUsersTable = function () {
+  var unsorted_columns = $('.ucb-rails-users-table th.unsorted').map((i, e) => $(e).index()).toArray()
+  if (unsorted_columns === []) {
+    var unsorted_columns = $(".ucb-rails-users-table th:contains('Edit'),.ucb-rails-users-table th:contains('Delete')").map((i, e) => $(e).index()).toArray()
+  }
+
   $('.ucb-rails-users-table').dataTable({
     searching: true,
     order: [[ 3, "asc" ]],
     columnDefs: [ {
-      targets: [8, 9],
+      targets: unsorted_columns,
       orderable: false
     }],
   })
