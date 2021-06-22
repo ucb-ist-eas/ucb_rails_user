@@ -1,3 +1,8 @@
+4.0.6
+-----
+
+Add support for customizing which columns in the user admin section are not sorted. ([PR #60](https://github.com/ucb-ist-eas/ucb_rails_user/pull/60))
+
 4.0.5
 -----
 
