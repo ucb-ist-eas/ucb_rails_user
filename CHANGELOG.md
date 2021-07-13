@@ -1,3 +1,10 @@
+4.0.7
+-----
+
+Update puma to address security issue. ([PR #59](https://github.com/ucb-ist-eas/ucb_rails_user/pull/59))
+Update addressable to address security issue. ([PR #61](https://github.com/ucb-ist-eas/ucb_rails_user/pull/61))
+
+
 4.0.6
 -----
 
