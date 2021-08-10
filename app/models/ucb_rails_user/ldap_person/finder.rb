@@ -43,9 +43,13 @@ module UcbRailsUser::LdapPerson
       search_opts[:return_result] = options[:return_result] if options.has_key?(:return_result)
       search_opts[:size] = options[:size] if options.has_key?(:size)
 
-      UCB::LDAP::Person.
-        search(search_opts).
-        map { |ldap_entry| Entry.new_from_ldap_entry(ldap_entry) }
+      result = []
+      %w(people guests).each do |ou|
+        search_opts[:base] = "ou=#{ou},dc=berkeley,dc=edu"
+        result = UCB::LDAP::Person.search(search_opts)
+        break if result.present?
+      end
+      result.map { |ldap_entry| Entry.new_from_ldap_entry(ldap_entry) }
     end
 
     def find_expired_by_attributes(attributes)
