@@ -39,9 +39,26 @@ module UserConcerns
     UcbRailsUser::LdapPerson::Finder.find_by_uid!(uid)
   end
 
-  def full_name
+  def main_first_name
+    has_preferred_name? ? preferred_first_name : first_name
+  end
+
+  def main_last_name
+    has_preferred_name? ? preferred_last_name : last_name
+  end
+
+  def primary_full_name
     return nil unless first_name || last_name
     "#{first_name} #{last_name}".strip
+  end
+
+  def preferred_full_name
+    return nil unless has_preferred_name?
+    "#{preferred_first_name} #{preferred_last_name}".strip
+  end
+
+  def full_name
+    preferred_full_name.present? ? preferred_full_name : primary_full_name
   end
 
   def can_impersonate?
@@ -110,6 +127,10 @@ module UserConcerns
     else
       nil
     end
+  end
+
+  def has_preferred_name?
+    respond_to?(:preferred_first_name) && (preferred_first_name.present? || preferred_last_name.present?)
   end
 
   class_methods do

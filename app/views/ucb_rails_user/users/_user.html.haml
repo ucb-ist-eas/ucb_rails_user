@@ -1,8 +1,8 @@
 %tr[user]
   %td= checkmark(user.superuser?)
   %td= checkmark(user.inactive?)
-  %td= user.first_name
-  %td= user.last_name
+  %td= user.main_first_name
+  %td= user.main_last_name
   %td= mail_to(user.email)
   %td.dt= user.last_login_at&.strftime("%m/%d/%Y %H:%M:%S")
   %td.min= user.ldap_uid

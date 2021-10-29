@@ -21,6 +21,15 @@ module UcbRailsUser::LdapPerson
       find_by_uid(uid) or raise(PersonNotFound, "uid=#{uid.inspect}")
     end
 
+    def find_by_employee_id(employee_id)
+      find_by_attributes(berkeleyeduucpathid: employee_id.to_s).first ||
+        find_expired_by_attributes(berkeleyeduucpathiduid: employee_id.to_s).first
+    end
+
+    def find_by_employee_id!(uid)
+      find_by_employee_id(uid) or raise(PersonNotFound, "employee_id=#{employee_id.inspect}")
+    end
+
     def find_by_first_last(first_name, last_name, options={})
       raise BlankSearchTermsError unless first_name.present? || last_name.present?
 

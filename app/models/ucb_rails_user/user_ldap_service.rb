@@ -9,6 +9,11 @@ class UcbRailsUser::UserLdapService
       create_user_from_ldap_entry(ldap_entry)
     end
 
+    def create_user_from_employee_id(employee_id)
+      ldap_entry = UcbRailsUser::LdapPerson::Finder.find_by_employee_id!(employee_id)
+      create_user_from_ldap_entry(ldap_entry)
+    end
+
     def create_user_from_ldap_entry(ldap_entry)
       UcbRailsUser.logger.debug "create_user_from_ldap_entry #{ldap_entry.uid}"
 
