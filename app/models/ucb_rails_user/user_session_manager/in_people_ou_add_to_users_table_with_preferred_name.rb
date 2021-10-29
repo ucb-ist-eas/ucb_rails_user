@@ -55,9 +55,9 @@ module UcbRailsUser
       attr_reader :app_id, :app_key, :endpoint
 
       def initialize
-        @app_id  = Rails.application.credentials.hcmm&.fetch(:app_id)
-        @app_key = Rails.application.credentials.hcmm&.fetch(:app_key)
-        @endpoint = Rails.application.credentials.hcmm&.fetch(:endpoint)
+        @app_id  = Rails.application.credentials.hcm&.fetch(:app_id)
+        @app_key = Rails.application.credentials.hcm&.fetch(:app_key)
+        @endpoint = Rails.application.credentials.hcm&.fetch(:endpoint)
       end
 
       def fetch_employee_data(ldap_uid)
