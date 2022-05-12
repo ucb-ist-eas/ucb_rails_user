@@ -32,7 +32,7 @@ var addDatatablesToUsersTable = function () {
     }],
   })
   var addNewHtml = '&nbsp;&nbsp;<a href="/admin/users/new" class="btn btn-primary">Add New</a>'
-  $('#DataTables_Table_0_filter').append(addNewHtml)
+  $('.ucb-rails-users-table-wrapper #DataTables_Table_0_filter').append(addNewHtml)
 }
 
 var resetImpersonateButton = function() {
