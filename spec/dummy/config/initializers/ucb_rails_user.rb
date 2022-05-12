@@ -1,3 +1,7 @@
+require "ucb_rails_user/configuration/email"
+require "ucb_rails_user/configuration/exception_notification"
+require "ucb_rails_user/configuration/ldap"
+require "ucb_rails_user/configuration/cas"
 ############################################################
 # Load configuration from config/credentials.yml.enc
 ############################################################
@@ -14,7 +18,7 @@ UcbRailsUser::Configuration::Email.configure(credentials.email&.with_indifferent
 # Exception Notification
 ############################################################
 
-#UcbRails::Configuration::ExceptionNotification.configure(config.for('exception_notification'))
+#UcbRailsUser::Configuration::ExceptionNotification.configure(config.for('exception_notification'))
 
 ############################################################
 # UCB::LDAP
