@@ -105,6 +105,20 @@ For example, if the admin screens for your app are under the `/backend` path rat
 resources :users, controller: "ucb_rails_user/users", path: "backend/users", as: :backend_users
 ```
 
+## Session Managers
+
+Authentication during login is handled by UCB's central auth system and this gem uses the [omniauth-cas](https://github.com/dlindahl/omniauth-cas) to manage the handshake. Once that is completed, we're handed the LDAP uid of the authenticated user, and, by default, this gem will attempt to pull the user's employee data and create or update a `User` record for them in the local database.
+
+This behavior can be customized by writing your own user session manager. There are two steps to do this:
+
+   1. Create a subclass of [`UcbRailsUser::UserSessionManager::Base`](https://github.com/ucb-ist-eas/ucb_rails_user/blob/main/app/models/ucb_rails_user/user_session_manager/base.rb). At a minimum you need to implement a `login` method that accepts the user's LDAP uid and returns a `User` instance (or raises an error if the process fails), and a `current_user` method that returns the `User` instance for the currently-logged-in user. [Several implementations](https://github.com/ucb-ist-eas/ucb_rails_user/tree/main/app/models/ucb_rails_user/user_session_manager) are included so you can look to these to base yours off of.
+
+   1. Open `config/initializers/ucb_rails_user.rb` in your host app and change the `user_session_manager` config setting to the class your custom implementation:
+
+```
+    config.user_session_manager = "MyApp::MyCustomUserSessionManager"
+```
+
 ## User Impersonation
 
 The impersonation feature allows admins to be logged in as a different user in the system. This is useful when trying to diagnose data-specific problems, as the admin can see exactly what the user sees.
