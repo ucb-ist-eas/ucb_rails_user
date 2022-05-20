@@ -1,8 +1,15 @@
+4.1.0
+-----
+   * Update dependencies to latest versions. ([PR #81](https://github.com/ucb-ist-eas/ucb_rails_user/pull/81))
+   * Improve scoping of "Add New" button CSS on Users screen. ([PR #81](https://github.com/ucb-ist-eas/ucb_rails_user/pull/81), resolveing [issue #21](https://github.com/ucb-ist-eas/ucb_rails_user/issues/21))
+   * Support lived names by optionally pulling employee data from UCPath rather than LDAP. ([PR #84](https://github.com/ucb-ist-eas/ucb_rails_user/pull/84))
+
+
 4.0.7
 -----
 
-Update puma to address security issue. ([PR #59](https://github.com/ucb-ist-eas/ucb_rails_user/pull/59))
-Update addressable to address security issue. ([PR #61](https://github.com/ucb-ist-eas/ucb_rails_user/pull/61))
+   * Update puma to address security issue. ([PR #59](https://github.com/ucb-ist-eas/ucb_rails_user/pull/59))
+   * Update addressable to address security issue. ([PR #61](https://github.com/ucb-ist-eas/ucb_rails_user/pull/61))
 
 
 4.0.6
@@ -18,8 +25,8 @@ Fix conversion of LDAP string to Ruby String ([PR #53](https://github.com/ucb-is
 4.0.4
 -----
 
-Add support for LDAP searches ([PR #48](https://github.com/ucb-ist-eas/ucb_rails_user/pull/48))
-Fix exceptions with skip_before_action ([PR #49](https://github.com/ucb-ist-eas/ucb_rails_user/pull/49))
+   * Add support for LDAP searches ([PR #48](https://github.com/ucb-ist-eas/ucb_rails_user/pull/48))
+   * Fix exceptions with skip_before_action ([PR #49](https://github.com/ucb-ist-eas/ucb_rails_user/pull/49))
 
 4.0.3
 -----
@@ -42,9 +49,8 @@ Upgrade to haml-rails 2.x ([PR #26](https://github.com/ucb-ist-eas/ucb_rails_use
 4.0.0
 -----
 
-Security upgrade(PR [#24](https://github.com/ucb-ist-eas/ucb_rails_user/pull/24))
-
-Move out of beta phase
+   * Security upgrade(PR [#24](https://github.com/ucb-ist-eas/ucb_rails_user/pull/24))
+   * Move out of beta phase
 
 4.0.0.beta1
 -----
