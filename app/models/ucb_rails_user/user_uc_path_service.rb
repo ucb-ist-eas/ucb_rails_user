@@ -4,20 +4,38 @@ class UcbRailsUser::UserUcPathService
 
   class << self
 
-    def create_or_update_user_from_ldap_uid(ldap_uid)
-      ucpath_entry = ucpath_client.fetch_employee_data(ldap_uid)
+    def create_or_update_user_from_employee_id(employee_id)
+      ucpath_entry = ucpath_client.fetch_employee_data_with_employee_id(employee_id)
       return nil unless ucpath_entry.present?
+      user = User.find_or_initialize_by(employee_id: employee_id)
+      update_user_record_from_ucpath_entry!(user, ucpath_entry)
+    end
 
-      User.find_or_initialize_by(ldap_uid: ldap_uid).tap do |user|
+    def create_or_update_user_from_ldap_uid(ldap_uid)
+      ucpath_entry = ucpath_client.fetch_employee_data_with_ldap_uid(ldap_uid)
+      return nil unless ucpath_entry.present?
+      user = User.find_or_initialize_by(ldap_uid: ldap_uid)
+      update_user_record_from_ucpath_entry!(user, ucpath_entry)
+    end
+
+    def ucpath_client
+      UcPathClient.new
+    end
+
+    def update_user_record_from_ucpath_entry!(user, ucpath_entry)
+      user.tap do |u|
         name_entry = parse_name(ucpath_entry)
-        user.first_name = name_entry["givenName"]
-        user.last_name = name_entry["familyName"]
-        user.employee_id = ucpath_entry["identifiers"]&.detect do |id|
+        u.first_name = name_entry["givenName"]
+        u.last_name = name_entry["familyName"]
+        u.employee_id ||= ucpath_entry["identifiers"]&.detect do |id|
           id["type"] == "hr-employee-id"
         end&.fetch("id")
-        user.email = parse_email(ucpath_entry)
-        user.inactive_flag = false # any way to pull this from the API?
-        user.save!
+        u.ldap_uid ||= ucpath_entry["identifiers"]&.detect do |id|
+          id["type"] == "campus-uid"
+        end&.fetch("id")
+        u.email = parse_email(ucpath_entry)
+        u.inactive_flag = false # any way to pull this from the API?
+        u.save!
       end
     end
 
@@ -42,10 +60,6 @@ class UcbRailsUser::UserUcPathService
       email_entry&.fetch("emailAddress")
     end
 
-    def ucpath_client
-      UcPathClient.new
-    end
-
   end
 
   class UcPathClient
@@ -59,15 +73,22 @@ class UcbRailsUser::UserUcPathService
       @endpoint = credentials&.fetch(:endpoint)
     end
 
-    def fetch_employee_data(ldap_uid)
+    def fetch_employee_data_with_ldap_uid(ldap_uid)
+      fetch_employee_data(ldap_uid, "campus-uid")
+    end
+
+    def fetch_employee_data_with_employee_id(employee_id)
+      fetch_employee_data(employee_id, "hr-employee-id")
+    end
+
+    def fetch_employee_data(id, id_type)
       if [app_id, app_key, endpoint].any?(&:blank?)
         Rails.logger.warn missing_api_values_message
         return nil
       end
-
       response =
-        Faraday.get("#{endpoint}/employees/#{ldap_uid}") do |req|
-          req.params["id-type"] = "campus-uid"
+        Faraday.get("#{endpoint}/employees/#{id}") do |req|
+          req.params["id-type"] = id_type
           req.headers["Accept"] = "application/json"
           req.headers["app_id"] = app_id
           req.headers["app_key"] = app_key
