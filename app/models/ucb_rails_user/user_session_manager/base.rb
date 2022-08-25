@@ -56,4 +56,3 @@ module UcbRailsUser
     end
   end
 end
-

@@ -231,11 +231,12 @@ end
 Similarly, to override `UserController,` add `app/controllers/ucb_rails/user_controller.rg` and add the following:
 
 ```ruby
-class UcbRailsUser::UsersController < ApplicationController
-  include UcbRailsUser::Concerns::UsersController
+module UcbRailsUser
+  class UsersController < ApplicationController
+    include UcbRailsUser::Concerns::UsersController
 
-  # add your code here
-
+    # add your code here
+  end
 end
 ```
 

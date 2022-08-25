@@ -1,8 +1,12 @@
-module UcbRailsUser::Concerns::ImpersonationConcerns
-  extend ActiveSupport::Concern
+module UcbRailsUser
+  module Concerns
+    module ImpersonationConcerns
+      extend ActiveSupport::Concern
 
-  included do
-    belongs_to :user
-    belongs_to :target, class_name: 'User'
+      included do
+        belongs_to :user
+        belongs_to :target, class_name: 'User'
+      end
+    end
   end
 end
