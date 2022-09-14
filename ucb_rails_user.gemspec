@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "active_attr", "~> 0.10"
   s.add_dependency "simple_form"
 
-  s.add_dependency "omniauth", "~> 1.8"
+  s.add_dependency "omniauth", ">= 1.8", "< 3.0"
   s.add_dependency "omniauth-cas", "~> 1.1"
 
   s.add_dependency "ucb_ldap", "~> 3.0"
