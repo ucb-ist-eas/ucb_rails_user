@@ -66,14 +66,12 @@ class UcbRailsUser::UserUcPathService
     attr_reader :app_id, :app_key, :endpoint
 
     def initialize
-      credentials =
+      base_credentials =
         Rails.application.credentials.ucpath&.with_indifferent_access || Rails.application.credentials.hcm&.with_indifferent_access
-      if credentials.has_key?(Rails.env)
-        credentials = credentials[Rails.env]
-      end
-      @app_id  = credentials&.fetch(:app_id)
-      @app_key = credentials&.fetch(:app_key)
-      @endpoint = credentials&.fetch(:endpoint)
+      env_credentials = base_credentials&.fetch(Rails.env) || {}
+      @app_id  = env_credentials&.fetch(:app_id, nil) || base_credentials&.fetch(:app_id, nil)
+      @app_key = env_credentials&.fetch(:app_key, nil) || base_credentials&.fetch(:app_key, nil)
+      @endpoint = env_credentials&.fetch(:endpoint, nil) || base_credentials&.fetch(:endpoint, nil)
     end
 
     def fetch_employee_data_with_ldap_uid(ldap_uid)

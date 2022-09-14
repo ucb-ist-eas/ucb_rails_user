@@ -12,7 +12,7 @@ describe UcbRailsUser::UserSessionManager::InUcPathAddToUsersTable do
 
     it "pulls the record from UCPath if the user is not in the database, and stores the lived name" do
       ucpath_client = instance_double("UcbRailsUser::UserUcPathService::UcPathClient")
-      allow(ucpath_client).to receive(:fetch_employee_data).and_return(mock_ucpath_response["response"].first)
+      allow(ucpath_client).to receive(:fetch_employee_data_with_ldap_uid).and_return(mock_ucpath_response["response"].first)
       expect(UcbRailsUser::UserUcPathService).to receive(:ucpath_client).and_return(ucpath_client)
       expect(UcbRailsUser::UserLdapService).not_to receive(:create_or_update_user_from_entry)
       user = manager.login("1234")
