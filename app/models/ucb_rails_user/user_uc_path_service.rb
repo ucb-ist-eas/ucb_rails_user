@@ -67,8 +67,10 @@ class UcbRailsUser::UserUcPathService
 
     def initialize
       base_credentials =
-        Rails.application.credentials.ucpath&.with_indifferent_access || Rails.application.credentials.hcm&.with_indifferent_access
-      env_credentials = base_credentials&.fetch(Rails.env) || {}
+        Rails.application.credentials.ucpath&.with_indifferent_access ||
+        Rails.application.credentials.hcm&.with_indifferent_access ||
+        Rails.application.credentials.fetch(:"ucb-hcm", {})&.with_indifferent_access
+      env_credentials = base_credentials&.fetch(Rails.env, {})
       @app_id  = env_credentials&.fetch(:app_id, nil) || base_credentials&.fetch(:app_id, nil)
       @app_key = env_credentials&.fetch(:app_key, nil) || base_credentials&.fetch(:app_key, nil)
       @endpoint = env_credentials&.fetch(:endpoint, nil) || base_credentials&.fetch(:endpoint, nil)
