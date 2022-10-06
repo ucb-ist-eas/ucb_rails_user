@@ -14,6 +14,7 @@ module UcbRailsUser::LdapPerson
     attribute :first_name
     attribute :last_name
     attribute :email
+    attribute :alternate_email
     attribute :phone
     attribute :departments
     attribute :affiliations
@@ -41,18 +42,19 @@ module UcbRailsUser::LdapPerson
 
       def new_from_ldap_entry(ldap_entry)
         new(
-          :uid => ldap_entry.uid,
-          :calnet_id => ldap_entry.berkeleyedukerberosprincipalstring.first,
-          :employee_id => ldap_entry.attributes[:berkeleyeduucpathid]&.first,
-          :student_id => ldap_entry.berkeleyedustuid,
-          :first_name => ldap_entry.givenname.first,
-          :last_name => ldap_entry.sn.first,
-          :email => ldap_entry.mail.first,
-          :phone => ldap_entry.phone,
-          :departments => ldap_entry.berkeleyeduunithrdeptname,
-          :affiliations => ldap_entry.berkeleyeduaffiliations,
-          :affiliate_id => ldap_entry.berkeleyeduaffid.first,
-          :inactive => ldap_entry.expired? || false
+          uid: ldap_entry.uid,
+          calnet_id: ldap_entry.berkeleyedukerberosprincipalstring.first,
+          employee_id: ldap_entry.attributes[:berkeleyeduucpathid]&.first,
+          student_id: ldap_entry.berkeleyedustuid,
+          first_name: ldap_entry.givenname.first,
+          last_name: ldap_entry.sn.first,
+          email: ldap_entry.mail.first,
+          alternate_email: ldap_entry.attributes[:berkeleyeduofficialemail]&.first,
+          phone: ldap_entry.phone,
+          departments: ldap_entry.berkeleyeduunithrdeptname,
+          affiliations: ldap_entry.berkeleyeduaffiliations,
+          affiliate_id: ldap_entry.berkeleyeduaffid.first,
+          inactive: ldap_entry.expired? || false
         )
       end
 
