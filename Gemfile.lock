@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ucb_rails_user (4.1.0)
+    ucb_rails_user (4.1.1)
       active_attr (~> 0.10)
       faraday (~> 1.0)
       haml (~> 5.0)
@@ -119,7 +119,7 @@ GEM
       railties (>= 5.0.0)
     faker (2.20.0)
       i18n (>= 1.8.11, < 2)
-    faraday (1.10.0)
+    faraday (1.10.2)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -282,7 +282,7 @@ GEM
     strscan (3.0.4)
     temple (0.8.2)
     thor (1.2.1)
-    tilt (2.0.10)
+    tilt (2.0.11)
     timeout (0.3.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
