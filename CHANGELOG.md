@@ -1,3 +1,7 @@
+## 4.1.2
+
+- Check for invalid emails when syncing user data from LDAP. ([PR #96](https://github.com/ucb-ist-eas/ucb_rails_user/pull/96) and [PR #97](https://github.com/ucb-ist-eas/ucb_rails_user/pull/97))
+
 ## 4.1.1
 
 - Update dependencies to latest versions. (multiple PRs)
