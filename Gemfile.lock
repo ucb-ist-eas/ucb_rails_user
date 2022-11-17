@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ucb_rails_user (4.1.1)
+    ucb_rails_user (4.1.2)
       active_attr (~> 0.10)
       faraday (~> 1.0)
       haml (~> 5.0)
