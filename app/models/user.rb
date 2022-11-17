@@ -1,5 +1,5 @@
-class UcbRailsUser::User < ActiveRecord::Base
-  include UcbRailsUser::Concerns::UserConcerns
+class User < ActiveRecord::Base
+  include UserConcerns
 
   # Don't add anything more here - any logic for the User class should go into
   # UserConcerns. This will make it much easier for host apps to customize

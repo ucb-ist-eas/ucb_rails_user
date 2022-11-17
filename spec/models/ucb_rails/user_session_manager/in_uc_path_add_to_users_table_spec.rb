@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe UcbRailsUser::UserSessionManager::InUcPathAddToUsersTable do
   let(:manager) { UcbRailsUser::UserSessionManager::InUcPathAddToUsersTable.new }
-  let!(:user) { UcbRailsUser::User.create!(ldap_uid: 1) }
+  let!(:user) { User.create!(ldap_uid: 1) }
 
   describe "#login" do
 

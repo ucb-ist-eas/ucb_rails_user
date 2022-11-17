@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user, class: UcbRailsUser::User do
+  factory :user do
     ldap_uid { Faker::Number.unique.number(digits: 8).to_s }
     employee_id { Faker::Number.unique.number(digits: 8).to_s }
     first_name { Faker::Name.first_name }

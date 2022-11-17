@@ -10,7 +10,7 @@ module UcbRailsUser::Concerns::ImpersonationsController
   end
 
   def create
-    target = UcbRailsUser::User.find_by(id: params[:ucb_rails_user_impersonation][:target_id])
+    target = User.find_by(id: params[:ucb_rails_user_impersonation][:target_id])
     if logged_in_user.impersonate!(target)
       flash[:info] = "You are now impersonating #{target.full_name}"
       return redirect_to "/"

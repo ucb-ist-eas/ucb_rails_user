@@ -14,7 +14,7 @@ RSpec.describe "managing users" do
 
   it "shows a list of current users, including superuser" do
     visit admin_users_path()
-    expect(find_all("tr.ucb_rails_user_user").count).to eq(4)
+    expect(find_all("tr.user").count).to eq(4)
     users.push(superuser).each do |user|
       expect(page).to have_content(user.first_name)
       expect(page).to have_content(user.last_name)
@@ -26,7 +26,7 @@ RSpec.describe "managing users" do
     alt_email = "dummy@dummy.com"
 
     visit admin_users_path()
-    click_on "edit", id: "edit_ucb_rails_user_user_#{user.id}"
+    click_on "edit", id: "edit_user_#{user.id}"
     fill_in "Alternate email", with: alt_email
     click_on "Submit"
     expect(page).to have_css("h1", text: "Users")
@@ -37,11 +37,11 @@ RSpec.describe "managing users" do
     user = users.first
 
     visit admin_users_path()
-    within("tr#ucb_rails_user_user_#{user.id}") do
+    within("tr#user_#{user.id}") do
       click_on "delete"
     end
     expect(page).to have_css("h1", text: "Users")
-    expect(UcbRailsUser::User.find_by(id: user.id)).to be_nil
+    expect(User.find_by(id: user.id)).to be_nil
   end
 
 end

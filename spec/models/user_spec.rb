@@ -1,8 +1,28 @@
 require 'rails_helper'
 
-describe UcbRailsUser::User do
-  let(:klass) { UcbRailsUser::User }
+describe User do
+  let(:klass) { User }
   let(:user) { klass.new}
+
+  it "#roles defaults to []" do
+    expect(klass.new.roles).to eq([])
+  end
+
+  describe "#has_role?" do
+    it "false" do
+      expect(user).to_not have_role("foo")
+    end
+
+    it "true" do
+      allow(user).to receive(:roles) { ["foo"] }
+      expect(user).to have_role("foo")
+    end
+
+    it "admin true" do
+      user.superuser_flag = true
+      expect(user).to have_role("foo")
+    end
+  end
 
   it 'full_name' do
     expect(klass.create!(ldap_uid: 1).full_name).to be_nil
@@ -12,7 +32,7 @@ describe UcbRailsUser::User do
   end
 
   it '#superuser!' do
-    user = UcbRailsUser::User.create!(ldap_uid: 1)
+    user = User.create!(ldap_uid: 1)
     expect(user).not_to be_superuser
 
     user.superuser!
@@ -23,13 +43,13 @@ describe UcbRailsUser::User do
   end
 
   it "active?" do
-    user = UcbRailsUser::User.create!(ldap_uid: 1)
+    user = User.create!(ldap_uid: 1)
     expect(user).not_to be_inactive
     expect(user).to be_active
   end
 
   it '#inactive!' do
-    user = UcbRailsUser::User.create!(ldap_uid: 1)
+    user = User.create!(ldap_uid: 1)
     expect(user).not_to be_inactive
 
     user.inactive!
@@ -40,15 +60,15 @@ describe UcbRailsUser::User do
   end
 
   it '.active' do
-    active = UcbRailsUser::User.create(ldap_uid: 1)
-    inactive = UcbRailsUser::User.create(ldap_uid: 2, inactive_flag: true)
-    expect(UcbRailsUser::User.active).to eq([active])
+    active = User.create(ldap_uid: 1)
+    inactive = User.create(ldap_uid: 2, inactive_flag: true)
+    expect(User.active).to eq([active])
   end
 
   it '.superuser' do
-    superuser = UcbRailsUser::User.create(ldap_uid: 1, superuser_flag: true)
-    not_superuser = UcbRailsUser::User.create(ldap_uid: 2)
-    expect(UcbRailsUser::User.superuser).to eq([superuser])
+    superuser = User.create(ldap_uid: 1, superuser_flag: true)
+    not_superuser = User.create(ldap_uid: 2)
+    expect(User.superuser).to eq([superuser])
   end
 
   describe "impersonating" do

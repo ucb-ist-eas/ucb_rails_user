@@ -8,9 +8,9 @@ module UcbRailsUser::Concerns::UsersController
   end
 
   def index
-    @users = UcbRailsUser::User.all
+    @users = User.all
     respond_to do |format|
-      format.html { @users = UcbRailsUser::User.all }
+      format.html { @users = User.all }
       format.json { render json: UcbRails::UsersDatatable.new(view_context).as_json }
     end
   end
@@ -40,7 +40,7 @@ module UcbRailsUser::Concerns::UsersController
   def create
     uid = params.fetch(:ldap_uid)
     user = nil
-    if user = UcbRailsUser::User.find_by_ldap_uid(uid)
+    if user = User.find_by_ldap_uid(uid)
       flash[:warning] = "User already exists"
     else
       begin
@@ -91,7 +91,7 @@ module UcbRailsUser::Concerns::UsersController
         :sort => :last_first_downcase
       )
       uid_strings = @lps_entries.map { |entry| entry.uid&.to_s }.compact
-      @lps_existing_uids = UcbRailsUser::User.where(ldap_uid: uid_strings).pluck(:uid)
+      @lps_existing_uids = User.where(ldap_uid: uid_strings).pluck(:uid)
       render 'ucb_rails_user/lps/search'
     end
 
@@ -115,7 +115,7 @@ module UcbRailsUser::Concerns::UsersController
   private
 
   def user_params(extra_params = [])
-    params.require(:ucb_rails_user_user).permit([
+    params.require(:user).permit([
       :superuser_flag,
       :inactive_flag,
       :first_name,
@@ -131,7 +131,7 @@ module UcbRailsUser::Concerns::UsersController
   end
 
   def find_user
-    @user ||= UcbRailsUser::User.find(params.fetch(:id))
+    @user ||= User.find(params.fetch(:id))
   end
 
 end
