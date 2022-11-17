@@ -1,18 +1,9 @@
-module UserConcerns
+module UcbRailsUser::Concerns::UserConcerns
   extend ActiveSupport::Concern
 
   included do
     has_many :impersonations, class_name: "::UcbRailsUser::Impersonation", dependent: :delete_all
     has_many :targets, class_name: "::UcbRailsUser::Impersonation", dependent: :delete_all
-  end
-
-  # Overridden by application
-  def roles
-    []
-  end
-
-  def has_role?(role)
-    superuser? || roles.include?(role)
   end
 
   def active?
@@ -55,7 +46,7 @@ module UserConcerns
       if target.respond_to?(:id)
         target.id
       else
-        User.find_by(id: target)&.id
+        UcbRailsUser::User.find_by(id: target)&.id
       end
     return false unless impersonation_is_valid?(target_id)
     @current_impersonation = create_impersonation(target_id)
@@ -64,7 +55,7 @@ module UserConcerns
 
   def current_impersonation
     return @current_impersonation if defined?(@current_impersonation)
-    @current_impersonation = UcbRailsUser::Impersonation.find_by(user_id: self.id, active: true)
+    @current_impersonation = UcbRailsUser::Impersonation.where(user_id: self.id, active: true).includes([:target]).take
   end
 
   def impersonation_target
