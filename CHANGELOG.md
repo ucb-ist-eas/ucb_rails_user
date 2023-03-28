@@ -1,3 +1,8 @@
+## 5.0.0
+
+- Make gem compatible with Rails 7. ([PR #115](https://github.com/ucb-ist-eas/ucb_rails_user/pull/115)
+- Many dependabot updates
+
 ## 4.1.2
 
 - Check for invalid emails when syncing user data from LDAP. ([PR #96](https://github.com/ucb-ist-eas/ucb_rails_user/pull/96) and [PR #97](https://github.com/ucb-ist-eas/ucb_rails_user/pull/97))
