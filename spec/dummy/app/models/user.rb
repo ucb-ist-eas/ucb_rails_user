@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  include UcbRailsUser::Concerns::UserConcerns
+  include UcbRailsUser::UserConcerns
 end
