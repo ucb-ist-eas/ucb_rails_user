@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe UcbRailsUser::UserSessionManager::AdminInUserTable do
   let(:manager) { UcbRailsUser::UserSessionManager::AdminInUserTable.new }
-  let(:user) { UcbRailsUser::User.create!(ldap_uid: 1) }
+  let(:user) { UcbRailsUser.user_class.create!(ldap_uid: 1) }
 
   describe "login" do
 

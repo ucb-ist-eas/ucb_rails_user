@@ -10,10 +10,10 @@ module UcbRailsUser::UserSearch
       .map { |n| "#{n}%" }
     query =
       if name1.present? && name2.present?
-        UcbRailsUser::User.where("LOWER(first_name) LIKE ? AND LOWER(last_name) LIKE ?", name1, name2)
-          .or(UcbRailsUser::User.where("LOWER(last_name) LIKE ? AND LOWER(first_name) LIKE ?", name1, name2))
+        UcbRailsUser.user_class.where("LOWER(first_name) LIKE ? AND LOWER(last_name) LIKE ?", name1, name2)
+          .or(UcbRailsUser.user_class.where("LOWER(last_name) LIKE ? AND LOWER(first_name) LIKE ?", name1, name2))
       else
-        UcbRailsUser::User.where("LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?", name1, name1)
+        UcbRailsUser.user_class.where("LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?", name1, name1)
       end
     query.order(:last_name, :first_name)
   end

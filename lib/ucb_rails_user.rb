@@ -9,9 +9,14 @@ require "active_attr"
 
 module UcbRailsUser
 
+  mattr_accessor :user_class
+
   def self.logger
     Rails.logger
   end
 
-end
+  def self.user_class
+    @@user_class&.constantize || ::User
+  end
 
+end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe UcbRailsUser::User do
-  let(:klass) { UcbRailsUser::User }
+describe UcbRailsUser.user_class do
+  let(:klass) { UcbRailsUser.user_class }
   let(:user) { klass.new}
 
   it 'full_name' do
@@ -12,7 +12,7 @@ describe UcbRailsUser::User do
   end
 
   it '#superuser!' do
-    user = UcbRailsUser::User.create!(ldap_uid: 1)
+    user = UcbRailsUser.user_class.create!(ldap_uid: 1)
     expect(user).not_to be_superuser
 
     user.superuser!
@@ -23,13 +23,13 @@ describe UcbRailsUser::User do
   end
 
   it "active?" do
-    user = UcbRailsUser::User.create!(ldap_uid: 1)
+    user = UcbRailsUser.user_class.create!(ldap_uid: 1)
     expect(user).not_to be_inactive
     expect(user).to be_active
   end
 
   it '#inactive!' do
-    user = UcbRailsUser::User.create!(ldap_uid: 1)
+    user = UcbRailsUser.user_class.create!(ldap_uid: 1)
     expect(user).not_to be_inactive
 
     user.inactive!
@@ -40,15 +40,15 @@ describe UcbRailsUser::User do
   end
 
   it '.active' do
-    active = UcbRailsUser::User.create(ldap_uid: 1)
-    inactive = UcbRailsUser::User.create(ldap_uid: 2, inactive_flag: true)
-    expect(UcbRailsUser::User.active).to eq([active])
+    active = UcbRailsUser.user_class.create(ldap_uid: 1)
+    inactive = UcbRailsUser.user_class.create(ldap_uid: 2, inactive_flag: true)
+    expect(UcbRailsUser.user_class.active).to eq([active])
   end
 
   it '.superuser' do
-    superuser = UcbRailsUser::User.create(ldap_uid: 1, superuser_flag: true)
-    not_superuser = UcbRailsUser::User.create(ldap_uid: 2)
-    expect(UcbRailsUser::User.superuser).to eq([superuser])
+    superuser = UcbRailsUser.user_class.create(ldap_uid: 1, superuser_flag: true)
+    not_superuser = UcbRailsUser.user_class.create(ldap_uid: 2)
+    expect(UcbRailsUser.user_class.superuser).to eq([superuser])
   end
 
   describe "impersonating" do

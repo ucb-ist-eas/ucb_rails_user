@@ -46,7 +46,7 @@ module UcbRailsUser::Concerns::UserConcerns
       if target.respond_to?(:id)
         target.id
       else
-        UcbRailsUser::User.find_by(id: target)&.id
+        UcbRailsUser.user_class.find_by(id: target)&.id
       end
     return false unless impersonation_is_valid?(target_id)
     @current_impersonation = create_impersonation(target_id)
@@ -114,4 +114,3 @@ module UcbRailsUser::Concerns::UserConcerns
   end
 
 end
-
