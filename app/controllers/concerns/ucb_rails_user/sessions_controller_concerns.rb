@@ -1,4 +1,4 @@
-module UcbRailsUser::Concerns::SessionsController
+module UcbRailsUser::SessionsControllerConcerns
   extend ActiveSupport::Concern
 
   included do

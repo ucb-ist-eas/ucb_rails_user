@@ -1,4 +1,4 @@
-module UcbRailsUser::Concerns::UsersController
+module UcbRailsUser::UsersControllerConcerns
   extend ActiveSupport::Concern
 
   included do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UcbRailsUser::Concerns::ControllerMethods do
+describe UcbRailsUser::AuthConcerns do
   let(:controller) { ApplicationController.new }
 
   describe '#logged_in?' do

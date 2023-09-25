@@ -1,4 +1,4 @@
 class ApplicationController < ActionController::Base
-  include UcbRailsUser::Concerns::ControllerMethods
+  include UcbRailsUser::AuthConcerns
   protect_from_forgery with: :exception
 end

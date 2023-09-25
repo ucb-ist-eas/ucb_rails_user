@@ -1,4 +1,4 @@
-module UcbRailsUser::Concerns::ImpersonationsController
+module UcbRailsUser::ImpersonationsControllerConcerns
   extend ActiveSupport::Concern
 
   included do
