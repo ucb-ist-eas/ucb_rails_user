@@ -1,4 +1,4 @@
-module UcbRailsUser::Concerns::ControllerMethods
+module UcbRailsUser::AuthConcerns
   extend ActiveSupport::Concern
 
   included do

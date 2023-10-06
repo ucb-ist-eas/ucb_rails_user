@@ -12,7 +12,7 @@ class UcbRailsUser::UserLdapService
     def create_user_from_ldap_entry(ldap_entry)
       UcbRailsUser.logger.debug "create_user_from_ldap_entry #{ldap_entry.uid}"
 
-      UcbRailsUser::User.create! do |u|
+      UcbRailsUser.user_class.create! do |u|
         u.ldap_uid = ldap_entry.uid
         u.employee_id = ldap_entry.employee_id
         u.affiliate_id = ldap_entry.affiliate_id
@@ -34,7 +34,7 @@ class UcbRailsUser::UserLdapService
     def update_user_from_ldap_entry(ldap_entry)
       UcbRailsUser.logger.debug "update_user_from_ldap_entry #{ldap_entry.uid}"
 
-      UcbRailsUser::User.find_by_ldap_uid!(ldap_entry.uid).tap do |user|
+      UcbRailsUser.user_class.find_by_ldap_uid!(ldap_entry.uid).tap do |user|
         user.employee_id = ldap_entry.employee_id if user.respond_to?(:employee_id=)
         user.affiliate_id = ldap_entry.affiliate_id
         user.student_id = ldap_entry.student_id
@@ -47,7 +47,7 @@ class UcbRailsUser::UserLdapService
     end
 
     def create_or_update_user(uid)
-      if user = UcbRailsUser::User.find_by_ldap_uid(uid)
+      if user = UcbRailsUser.user_class.find_by_ldap_uid(uid)
         update_user_from_uid(uid)
       else
         create_user_from_uid(uid)
@@ -58,7 +58,7 @@ class UcbRailsUser::UserLdapService
       # LDAP returns some values as Net::BER::BerIdentifiedString instances, and not
       # all DBs seem to handle that well (e.g. Oracle) - we might want to fix LDAP library
       # to smooth this over?
-      if user = UcbRailsUser::User.find_by_ldap_uid(entry.uid.to_s)
+      if user = UcbRailsUser.user_class.find_by_ldap_uid(entry.uid.to_s)
         update_user_from_ldap_entry(entry)
       else
         create_user_from_ldap_entry(entry)

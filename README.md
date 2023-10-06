@@ -2,13 +2,13 @@
 
 A [Rails engine](http://guides.rubyonrails.org/engines.html) that provides authentication and user management for UCB Rails apps. By adding this engine to your app, you get:
 
-  * a full [User model](https://github.com/ucb-ist-eas/ucb_rails_user/blob/master/app/models/user.rb) which can be customized by host apps
   * login and logout via [CAS](https://calnetweb.berkeley.edu/calnet-technologists/cas)
   * automatic creation of user records following CAS authentication
   * controller filters that block access to resources unless user is logged in
   * a default home page that reflects user's login status
   * admin screens for updating and deleting user records
   * ability for admins to impersonate other users
+  * optional generator to create a users table that's compatible with this gem
 
 This engine also includes the [Datatables](https://datatables.net/) JQuery plug-in, which is used in the user management screens, and [typeahead.js](https://github.com/twitter/typeahead.js) for autocomplete. Host apps can make use of these libraries as well.
 
@@ -16,14 +16,18 @@ This engine also includes the [Datatables](https://datatables.net/) JQuery plug-
 
 Version 2.0 and greater of this gem sets a user's `employee_id` to the new UCPath employee id, rather than the legacy HCM employee id. If you need to use the older ID, use version 1.1.3 of this gem, or lower.
 
+## Upgrading to version 6.0+
+
+See [this wiki page](https://github.com/ucb-ist-eas/ucb_rails_user/wiki/Upgrading-to-version-6.0) for details.
+
 ## Upgrading to version 3.0+ from version 2.x
 
 See [this wiki page](https://github.com/ucb-ist-eas/ucb_rails_user/wiki/Upgrading-to-version-3.0) for details.
 
 ## Prerequisites
 
-  * Ruby >= 2.3
-  * Rails >= 5.1
+  * Ruby >= 3.0
+  * Rails >= 6.0
 
 Older versions may work as well, but they haven't been tested.
 
@@ -51,7 +55,7 @@ bundle install
 3. Add this line to your host app's `ApplicationController:`
 
 ```ruby
-include UcbRailsUser::Concerns::ControllerMethods
+include UcbRailsUser::AuthConcerns
 ```
 
 4. Copy [this initializer file](https://github.com/ucb-ist-eas/ucb_rails_cli/blob/master/lib/ucb_rails_cli/templates/config/initializers/ucb_rails_user.rb) into your host app's `config/initializer` directory.
@@ -62,12 +66,14 @@ include UcbRailsUser::Concerns::ControllerMethods
 root to: UcbRailsUser::HomeController.action(:index)
 ```
 
-6. Copy the migrations for the `User` and `Impersonation` models from the engine into your host app, and run them:
+6. Copy the migrations for the `Impersonation` models from the engine into your host app, and run them:
 
 ```
 bin/rails railties:install:migrations
 bin/rake db:migrate
 ```
+
+7. (optional) If you don't already have a `users` table, you can generate one with a Rails task (see next section below)
 
 8. Update your assets files
 
@@ -83,7 +89,7 @@ And in `application.js` add this line:
 //= require ucb_rails_user/scripts
 ```
 
-8. Restart your host app as usual
+9. Restart your host app as usual
 
 You should be able to access the following routes:
 
@@ -94,6 +100,24 @@ You should be able to access the following routes:
   * `/admin/impersonations`: this is the page used to start impersonating another user (see below)
   * `/admin/stop_impersonation`: this stops an active impersonation
   * `/admin/users/toggle_superuser`: in dev mode, you can use this url to turn the superuser flag of your account on and off
+
+## User model
+
+This gem does not define a model representing a user - that is left to the host app. However, if you don't have such a model yet, you can generate a migration for one by running:
+
+```bash
+bin/rails ucb_rails_user:create_users_table
+```
+
+This will create a migration for a `users` table containing the fields this gem expects to see.
+
+### Alternate naming
+
+By default, this gem expects the user model to be named `User`, but if you're using a different class name, you can specify that name in an initializer (e.g. `config/initializers/ucb_rails_user.rb`):
+
+```ruby
+UcbRailsUser.user_class = "Entity"
+```
 
 ## Routing
 
@@ -149,9 +173,9 @@ Alice stops impersonating Bob:
    * `logged_in_user` returns Alice
    * `current_user` returns Alice
 
-## Controller Methods
+## Auth Helpers
 
-If you followed the setup instructions above, your `ApplicationController` should be including `UcbRails::Concerns::ControllerMethods.` This provides a number of utility methods you can use in your controllers:
+If you followed the setup instructions above, your `ApplicationController` should be including `UcbRails::AuthConcerns.` This provides a number of utility methods you can use in your controllers:
 
   * `current_user`: returns the `User` instance for the currently logged-in user, or `nil` if user is not logged in. If the logged-in user is impersonating another user, this will return the impersonated user
   * `logged_in_user`: this returns the user who logged in with their Calnet credentials, even if that user is impersonating another user
@@ -232,7 +256,7 @@ Similarly, to override `UserController,` add `app/controllers/ucb_rails/user_con
 
 ```ruby
 class UcbRailsUser::UsersController < ApplicationController
-  include UcbRailsUser::Concerns::UsersController
+  include UcbRailsUser::UsersControllerConcerns
 
   # add your code here
 

@@ -1,4 +1,4 @@
-module UcbRailsUser::Concerns::SessionsController
+module UcbRailsUser::SessionsControllerConcerns
   extend ActiveSupport::Concern
 
   included do
@@ -35,7 +35,7 @@ module UcbRailsUser::Concerns::SessionsController
     user_session_manager.logout(current_user)
     provider = session[:omniauth_provider]
     reset_session
-    redirect_to redirect_url(provider)
+    redirect_to redirect_url(provider), allow_other_host: true
   end
 
   # Action called when unauthorized access attempted

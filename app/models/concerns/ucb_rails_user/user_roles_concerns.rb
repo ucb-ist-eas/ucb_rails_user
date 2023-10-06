@@ -1,4 +1,4 @@
-module UcbRailsUser::Concerns::UserRolesConcerns
+module UcbRailsUser::UserRolesConcerns
   extend ActiveSupport::Concern
 
   # Overridden by application

@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe UcbRailsUser::UserSessionManager::ActiveInUserTable do
   let(:manager) { UcbRailsUser::UserSessionManager::ActiveInUserTable.new }
-  let(:user) { UcbRailsUser::User.create!(ldap_uid: 1) }
-  let(:last_user) { UcbRailsUser::User.last! }
+  let(:user) { UcbRailsUser.user_class.create!(ldap_uid: 1) }
+  let(:last_user) { UcbRailsUser.user_class.last! }
 
   describe "login" do
 

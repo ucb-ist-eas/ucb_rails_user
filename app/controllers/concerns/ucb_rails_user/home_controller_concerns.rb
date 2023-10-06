@@ -1,4 +1,4 @@
-module UcbRailsUser::Concerns::HomeController
+module UcbRailsUser::HomeControllerConcerns
   extend ActiveSupport::Concern
 
   included do
@@ -14,4 +14,3 @@ module UcbRailsUser::Concerns::HomeController
   end
 
 end
-

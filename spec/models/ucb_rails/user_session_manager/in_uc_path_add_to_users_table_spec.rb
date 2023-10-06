@@ -2,10 +2,9 @@ require "rails_helper"
 
 describe UcbRailsUser::UserSessionManager::InUcPathAddToUsersTable do
   let(:manager) { UcbRailsUser::UserSessionManager::InUcPathAddToUsersTable.new }
-  let!(:user) { UcbRailsUser::User.create!(ldap_uid: 1) }
+  let!(:user) { UcbRailsUser.user_class.create!(ldap_uid: 1) }
 
   describe "#login" do
-
     it "pulls the existing user record if the user is in the database" do
       expect(manager.login("1")).to eq(user)
     end
@@ -34,9 +33,7 @@ describe UcbRailsUser::UserSessionManager::InUcPathAddToUsersTable do
       user = manager.login("1234")
       expect(user.email).to eq("tony_ldap@stark.com")
     end
-
   end
-
 end
 
 def mock_ldap_response
@@ -51,56 +48,56 @@ def mock_ldap_response
 end
 
 def mock_ucpath_response
-{
-    "response" => [
-    {
-        "identifiers" => [
-        {
-            "type" => "hr-employee-id",
-            "id" => "12345678"
-          },
-        {
-            "type" => "campus-uid",
-            "id" => "1234"
-          },
-        ],
-        "names" => [
-        {
-            "type" => {
-              "code" => "PRI",
-              "description" => "Primary"
+  {
+      "response" => [
+      {
+          "identifiers" => [
+          {
+              "type" => "hr-employee-id",
+              "id" => "12345678"
             },
-            "familyName" => "Stark",
-            "givenName" => "Tony",
-            "lastChangedBy" => {
-              "id" => "UC_CONV_ARO"
+          {
+              "type" => "campus-uid",
+              "id" => "1234"
             },
-            "fromDate" => "1989-06-19"
-          },
-        {
-            "type" => {
-              "code" => "PRF",
-              "description" => "Preferred"
+          ],
+          "names" => [
+          {
+              "type" => {
+                "code" => "PRI",
+                "description" => "Primary"
+              },
+              "familyName" => "Stark",
+              "givenName" => "Tony",
+              "lastChangedBy" => {
+                "id" => "UC_CONV_ARO"
+              },
+              "fromDate" => "1989-06-19"
             },
-            "familyName" => "Man",
-            "givenName" => "Iron",
-            "lastChangedBy" => {
-              "id" => "UC_CONV_ARO"
-            },
-            "fromDate" => "1989-06-19"
-          }
-        ],
-        "emails" => [
-        {
-            "type" => {
-              "code" => "BUSN",
-              "description" => "Business"
-            },
-            "emailAddress" => "tony_ucpath@stark.com",
-            "primary" => true
-          }
-        ],
-      }
-    ]
-  }
+          {
+              "type" => {
+                "code" => "PRF",
+                "description" => "Preferred"
+              },
+              "familyName" => "Man",
+              "givenName" => "Iron",
+              "lastChangedBy" => {
+                "id" => "UC_CONV_ARO"
+              },
+              "fromDate" => "1989-06-19"
+            }
+          ],
+          "emails" => [
+          {
+              "type" => {
+                "code" => "BUSN",
+                "description" => "Business"
+              },
+              "emailAddress" => "tony_ucpath@stark.com",
+              "primary" => true
+            }
+          ],
+        }
+      ]
+    }
 end

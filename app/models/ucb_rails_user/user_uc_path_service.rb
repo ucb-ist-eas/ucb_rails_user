@@ -7,14 +7,14 @@ class UcbRailsUser::UserUcPathService
     def create_or_update_user_from_employee_id(employee_id)
       ucpath_entry = ucpath_client.fetch_employee_data_with_employee_id(employee_id)
       return nil unless ucpath_entry.present?
-      user = UcbRailsUser::User.find_or_initialize_by(employee_id: employee_id)
+      user = UcbRailsUser.user_class.find_or_initialize_by(employee_id: employee_id)
       update_user_record_from_ucpath_entry!(user, ucpath_entry)
     end
 
     def create_or_update_user_from_ldap_uid(ldap_uid)
       ucpath_entry = ucpath_client.fetch_employee_data_with_ldap_uid(ldap_uid)
       return nil unless ucpath_entry.present?
-      user = UcbRailsUser::User.find_or_initialize_by(ldap_uid: ldap_uid)
+      user = UcbRailsUser.user_class.find_or_initialize_by(ldap_uid: ldap_uid)
       update_user_record_from_ucpath_entry!(user, ucpath_entry)
     end
 
@@ -118,4 +118,3 @@ class UcbRailsUser::UserUcPathService
   end
 
 end
-

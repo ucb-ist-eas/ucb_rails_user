@@ -1,4 +1,15 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+
+# for test coverage - this must be at the top of the file
+if ENV["TEST_COVERAGE"] == "true"
+  require 'simplecov'
+  SimpleCov.start "rails" do
+    add_filter "lib/ucb_rails_user"
+  end
+else
+  puts "Running tests without coverage: to enable coverage, set TEST_COVERAGE=true"
+end
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../dummy/config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -9,7 +20,6 @@ require 'rspec/rails'
 require 'ucb_rails_user/spec_helpers'
 require 'factory_bot_rails'
 require 'faker'
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
