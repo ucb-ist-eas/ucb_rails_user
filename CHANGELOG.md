@@ -1,3 +1,8 @@
+## 6.0.0
+
+- Refactor namespacing to improve compatibility with zeitwerk. ([PR #121](https://github.com/ucb-ist-eas/ucb_rails_user/pull/121) - see [this wiki page](https://github.com/ucb-ist-eas/ucb_rails_user/wiki/Upgrading-to-version-6.0) for instructions on how to upgrade.
+- Many dependabot updates
+
 ## 5.0.0
 
 - Make gem compatible with Rails 7. ([PR #115](https://github.com/ucb-ist-eas/ucb_rails_user/pull/115)
