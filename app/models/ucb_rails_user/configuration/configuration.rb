@@ -60,7 +60,7 @@ module UcbRailsUser
     end
 
     def load_file
-      if File.exists?(config_filename)
+      if File.exist?(config_filename)
         self.config_yaml = YAML.load_file(config_filename)
       else
         raise(FileNotFound, config_filename)
