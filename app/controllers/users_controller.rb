@@ -1,4 +1,4 @@
-class UcbRailsUser::UsersController < ApplicationController
+class UsersController < ApplicationController
   include UcbRailsUser::UsersControllerConcerns
 
   # Don't add anything more here - any logic for this controller should go into
