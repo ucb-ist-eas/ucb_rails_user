@@ -175,7 +175,7 @@ Alice stops impersonating Bob:
 
 ## Auth Helpers
 
-If you followed the setup instructions above, your `ApplicationController` should be including `UcbRails::AuthConcerns.` This provides a number of utility methods you can use in your controllers:
+If you followed the setup instructions above, your `ApplicationController` should be including `UcbRailsUser::AuthConcerns.` This provides a number of utility methods you can use in your controllers:
 
   * `current_user`: returns the `User` instance for the currently logged-in user, or `nil` if user is not logged in. If the logged-in user is impersonating another user, this will return the impersonated user
   * `logged_in_user`: this returns the user who logged in with their Calnet credentials, even if that user is impersonating another user
