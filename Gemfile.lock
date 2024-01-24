@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    ucb_rails_user (4.1.1)
+    ucb_rails_user (5.0.0)
       active_attr (~> 0.10)
-      faraday (~> 1.0)
+      faraday (~> 2.0)
       haml (~> 5.0)
       haml-rails (~> 2.0)
       omniauth (>= 1.8, < 3.0)
@@ -89,6 +89,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
+    base64 (0.2.0)
     builder (3.2.4)
     capybara (3.37.1)
       addressable
@@ -117,29 +118,11 @@ GEM
       railties (>= 5.0.0)
     faker (2.20.0)
       i18n (>= 1.8.11, < 2)
-    faraday (1.10.2)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
-      faraday-excon (~> 1.1)
-      faraday-httpclient (~> 1.0)
-      faraday-multipart (~> 1.0)
-      faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.0)
-      faraday-patron (~> 1.0)
-      faraday-rack (~> 1.0)
-      faraday-retry (~> 1.0)
+    faraday (2.8.1)
+      base64
+      faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
-    faraday-excon (1.1.0)
-    faraday-httpclient (1.0.1)
-    faraday-multipart (1.0.4)
-      multipart-post (~> 2)
-    faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.2.0)
-    faraday-patron (1.0.0)
-    faraday-rack (1.0.0)
-    faraday-retry (1.0.3)
+    faraday-net_http (3.0.2)
     globalid (1.0.1)
       activesupport (>= 5.0)
     haml (5.2.2)
@@ -167,7 +150,6 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.18.0)
-    multipart-post (2.2.3)
     net-imap (0.3.1)
       net-protocol
     net-ldap (0.17.1)
@@ -295,4 +277,4 @@ DEPENDENCIES
   ucb_rails_user!
 
 BUNDLED WITH
-   2.3.25
+   2.4.7
