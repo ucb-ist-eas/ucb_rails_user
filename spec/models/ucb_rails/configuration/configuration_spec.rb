@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'ucb_rails_user/configuration/configuration'
 
 describe UcbRailsUser::Configuration::Configuration do
   let(:test_config_file) { UcbRailsUser::Engine.root.join('spec/config.yml')}
