@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ucb_rails_user (5.0.0)
+    ucb_rails_user (6.0.0)
       active_attr (~> 0.10)
       faraday (~> 1.0)
       haml (~> 5.0)
@@ -61,10 +61,10 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_attr (0.15.4)
-      actionpack (>= 3.0.2, < 7.1)
-      activemodel (>= 3.0.2, < 7.1)
-      activesupport (>= 3.0.2, < 7.1)
+    active_attr (0.16.0)
+      actionpack (>= 3.0.2, < 7.2)
+      activemodel (>= 3.0.2, < 7.2)
+      activesupport (>= 3.0.2, < 7.2)
     activejob (7.0.8)
       activesupport (= 7.0.8)
       globalid (>= 0.3.6)
@@ -102,7 +102,7 @@ GEM
       launchy
     concurrent-ruby (1.2.2)
     crass (1.0.6)
-    date (3.3.3)
+    date (3.3.4)
     diff-lcs (1.5.0)
     docile (1.4.0)
     erubi (1.12.0)
@@ -165,18 +165,20 @@ GEM
     mini_mime (1.1.5)
     minitest (5.20.0)
     multipart-post (2.3.0)
-    net-imap (0.4.0)
+    net-imap (0.4.9.1)
       date
       net-protocol
     net-ldap (0.17.1)
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.1)
+    net-protocol (0.2.2)
       timeout
-    net-smtp (0.4.0)
+    net-smtp (0.4.0.1)
       net-protocol
-    nio4r (2.5.9)
-    nokogiri (1.15.4-arm64-darwin)
+    nio4r (2.7.0)
+    nokogiri (1.16.2-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     omniauth (1.9.2)
       hashie (>= 3.4.6)
@@ -186,9 +188,9 @@ GEM
       nokogiri (~> 1.5)
       omniauth (~> 1.2)
     public_suffix (5.0.3)
-    puma (6.4.0)
+    puma (6.4.2)
       nio4r (~> 2.0)
-    racc (1.7.1)
+    racc (1.7.3)
     rack (2.2.8)
     rack-test (2.1.0)
       rack (>= 1.3)
@@ -246,7 +248,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    simple_form (5.2.0)
+    simple_form (5.3.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     simplecov (0.22.0)
@@ -263,10 +265,11 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.6-arm64-darwin)
+    sqlite3 (1.6.6-x86_64-linux)
     temple (0.10.3)
     thor (1.2.2)
     tilt (2.3.0)
-    timeout (0.4.0)
+    timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     ucb_ldap (3.1.3)
@@ -281,6 +284,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   capybara (~> 3.0)
