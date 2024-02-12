@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails", "~> 5.0"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "faker"
+  s.add_development_dependency "sprockets-rails"
   s.add_development_dependency "capybara", "~> 3.0"
   s.add_development_dependency "capybara-screenshot"
   s.add_development_dependency "selenium-webdriver"

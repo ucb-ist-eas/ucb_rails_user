@@ -295,6 +295,7 @@ DEPENDENCIES
   rspec-rails (~> 5.0)
   selenium-webdriver
   simplecov
+  sprockets-rails
   sqlite3
   ucb_rails_user!
 
