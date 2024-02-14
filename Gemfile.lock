@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ucb_rails_user (6.0.0)
+    ucb_rails_user (6.1.1)
       active_attr (~> 0.10)
       faraday (~> 1.0)
       haml (~> 5.0)
@@ -10,7 +10,6 @@ PATH
       omniauth-cas (~> 1.1)
       rails (> 5.2, < 8.0)
       simple_form
-      sprockets-rails
       ucb_ldap (~> 3.0)
 
 GEM
@@ -164,8 +163,8 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.20.0)
-    multipart-post (2.3.0)
-    net-imap (0.4.9.1)
+    multipart-post (2.4.0)
+    net-imap (0.4.10)
       date
       net-protocol
     net-ldap (0.17.1)

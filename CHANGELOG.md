@@ -1,16 +1,20 @@
+## 6.1.1
+
+- Make sprockets a dev dependency, rather than a gem dependency. ([PR #129](https://github.com/ucb-ist-eas/ucb_rails_user/pull/129))
+
 ## 6.1.0
 
-- Move configuration module to better work with zeitwerk. ([PR #127](https://github.com/ucb-ist-eas/ucb_rails_user/pull/127)
+- Move configuration module to better work with zeitwerk. ([PR #127](https://github.com/ucb-ist-eas/ucb_rails_user/pull/127))
 - Many dependabot updates
 
 ## 6.0.0
 
-- Refactor namespacing to improve compatibility with zeitwerk. ([PR #121](https://github.com/ucb-ist-eas/ucb_rails_user/pull/121) - see [this wiki page](https://github.com/ucb-ist-eas/ucb_rails_user/wiki/Upgrading-to-version-6.0) for instructions on how to upgrade.
+- Refactor namespacing to improve compatibility with zeitwerk. ([PR #121](https://github.com/ucb-ist-eas/ucb_rails_user/pull/121)) - see [this wiki page](https://github.com/ucb-ist-eas/ucb_rails_user/wiki/Upgrading-to-version-6.0) for instructions on how to upgrade.
 - Many dependabot updates
 
 ## 5.0.0
 
-- Make gem compatible with Rails 7. ([PR #115](https://github.com/ucb-ist-eas/ucb_rails_user/pull/115)
+- Make gem compatible with Rails 7. ([PR #115](https://github.com/ucb-ist-eas/ucb_rails_user/pull/115))
 - Many dependabot updates
 
 ## 4.1.2
