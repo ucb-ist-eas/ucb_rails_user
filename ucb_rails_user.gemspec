@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_dependency "rails", "> 5.2", "< 8.0"
-  s.add_dependency "sprockets-rails"
 
   s.add_dependency "haml", "~> 5.0"
   s.add_dependency "haml-rails", "~> 2.0"
@@ -36,6 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails", "~> 5.0"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "faker"
+  s.add_development_dependency "sprockets-rails"
   s.add_development_dependency "capybara", "~> 3.0"
   s.add_development_dependency "capybara-screenshot"
   s.add_development_dependency "selenium-webdriver"
