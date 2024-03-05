@@ -11,5 +11,6 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require_tree .
-
+//= require ucb_rails_user/datatables
+//= require ucb_rails_user/typeahead.bundle
+//= require ucb_rails_user/ucb_rails_user
