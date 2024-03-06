@@ -1,3 +1,5 @@
+import Bloodhound from "ucb_rails_user/bloodhound"
+
 // the users table has width set to auto, but the pagination tries to stretch to full width - this
 // forces the pagination to match the table
 var resizePagination = function () {
@@ -101,3 +103,9 @@ $( window ).on("load", function() {
   })
 
 })
+
+// hack to make this work better with ES modules
+window.resizePagination = resizePagination
+window.addDatatablesToNewUserSearchResults = addDatatablesToNewUserSearchResults
+window.resetImpersonateButton = resetImpersonateButton
+window.clearImpersonateSelection = clearImpersonateSelection
