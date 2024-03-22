@@ -1,3 +1,7 @@
+## 6.2.0
+
+- Tweak CSS and JS asset setup to work better with new Rails asset pipeline. ([PR #135](https://github.com/ucb-ist-eas/ucb_rails_user/pull/135))
+
 ## 6.1.1
 
 - Make sprockets a dev dependency, rather than a gem dependency. ([PR #129](https://github.com/ucb-ist-eas/ucb_rails_user/pull/129))
