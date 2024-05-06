@@ -52,7 +52,7 @@ module UcbRailsUser::LdapPerson
           first_name: ldap_entry.givenname.first&.to_s,
           last_name: ldap_entry.sn.first&.to_s,
           email: ldap_entry.mail.first&.to_s,
-          alternate_email: ldap_entry.attributes[:berkeleyeduofficialemail]&.first&.to_s,
+          alternate_email: ldap_entry.attributes[:berkeleyedualternateid]&.first&.to_s,
           phone: ldap_entry.phone&.to_s,
           departments: ldap_entry.berkeleyeduunithrdeptname&.to_s,
           affiliations: ldap_entry.berkeleyeduaffiliations&.map(&:to_s),
